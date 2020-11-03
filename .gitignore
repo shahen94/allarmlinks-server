@@ -1,3 +1,6 @@
+# Custom
+src/config/config.env
+
 # Logs
 logs
 *.log
