@@ -1,17 +1,22 @@
-import AppError from "../errors/AppError"
+import {Request, Response} from "express";
+import AppError from "../errors/AppError";
 
-const errorHandler = (err, req, res, next) => {
-  let status = 500;
-  let message = "Internal Server Error";
+const errorHandler = (
+    err: any,
+    req: Request,
+    res: Response
+) => {
+    let status: number = 500;
+    let message: string = "Internal Server Error";
 
-  if (err instanceof AppError) {
-    status = err.status;
-    message = err.message;
-  }
+    if (err instanceof AppError) {
+        status = err.status;
+        message = err.message;
+    }
 
-  res.status(status).json({
-    success: false,
-    error: message,
-  });
+    res.status(status).json({
+        success: false,
+        error: message,
+    });
 };
 export default errorHandler;
