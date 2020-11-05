@@ -1,4 +1,4 @@
-import {Volunteer} from "./volunteer.model";
+import {IVolunteer, Volunteer} from "./volunteer.model";
 import {VolunteerRegisterStepOneData, VolunteerRegisterStepTwoData,} from "./verification/verification.interfaces";
 
 import AppError from "../../errors/AppError";
@@ -18,13 +18,13 @@ export const validateVolunteerRegisterDataStepOne = async function (
     return volunteer;
 };
 
-const volunteerStepOneDataValidation = Joi.object({
+export const volunteerStepOneDataValidation = Joi.object({
     name: Joi.string().alphanum().min(1).required(),
     surname: Joi.string().alphanum().min(1).required(),
     email: Joi.string().email().required(),
 });
 
-const volunteerPhoneValidation = Joi.object({
+export const volunteerPhoneValidation = Joi.object({
     phone: Joi.string().phoneNumber(),
     id: Joi.string(),
 });
@@ -91,4 +91,53 @@ export const updatePhoneVerificationStatus = function (
             runValidators: true,
         }
     );
+};
+
+export const existsVolunteerById = async (volunteerId: string): Promise<boolean> => {
+    const volunteer = await Volunteer.findById(volunteerId);
+    return !!volunteer;
+}
+
+export const validateAdditionalData = async (data: IVolunteer) => {
+    const volunteer = await Volunteer.findById(data._id);
+    if (!volunteer)
+        throw new AppError(400, "Volunteer doesn't exist");
+
+    if (!data.country || !data.city)
+        throw new AppError(400, "Country and City fields are required");
+
+    await volunteerStepOneDataValidation.validateAsync({name: data.name, surname: data.surname, email: data.email});
+
+    if (!data.phone)
+        throw new AppError(400, "Phone is not valid.");
+
+    await volunteerPhoneValidation.validateAsync({phone: data.phone, id: data._id});
+
+    if (volunteer._id != data._id || volunteer.email != data.email || volunteer.name != data.name
+        || volunteer.surname != data.surname || volunteer.phone != data.phone)
+        throw new AppError(400, "Incorrect data provided.");
+};
+
+export const updateWithAdditionalData = async (data: IVolunteer) => {
+    await validateAdditionalData(data);
+
+    return Volunteer.findByIdAndUpdate(data._id, {
+        birthDate: data.birthDate,
+        country: data.country,
+        city: data.city,
+        address: data.address,
+        specialization: data.specialization,
+        currentEmployerName: data.currentEmployerName,
+        occupation: data.occupation,
+        languages: data.languages,
+        hoursPerWeek: data.hoursPerWeek,
+        facebookProfile: data.facebookProfile,
+        linkedinProfile: data.linkedinProfile,
+        twitterProfile: data.twitterProfile,
+        whereToVolunteer: data.whereToVolunteer,
+        other: data.other
+    }, {
+        new: true,
+        runValidators: true,
+    });
 };
