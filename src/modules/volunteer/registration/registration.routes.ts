@@ -2,9 +2,11 @@ import {Application, Request, Response} from "express";
 
 const {Router} = require("express");
 const router = Router();
-const routeUrl = "/admin";
+const routeUrl = "/registration";
 
-router.route(routeUrl).get((req: Request, res: Response) => res.send("2156"))
+router.get(routeUrl + "/ok", (req: Request, res: Response) =>
+    res.send("barev")
+);
 
 router.setupRoutes = (app: Application, prefix: string): void => {
     app.use(prefix, router);

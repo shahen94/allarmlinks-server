@@ -6,9 +6,14 @@ const errorHandler = (
     req: Request,
     res: Response,
     next: NextFunction
-) => {
+): void => {
     let status: number = 500;
     let message: string = "Internal Server Error";
+
+    if (err instanceof Error) {
+        status = 400;
+        message = err.message;
+    }
 
     if (err instanceof AppError) {
         status = err.status;
@@ -16,7 +21,6 @@ const errorHandler = (
     }
 
     res.status(status).json({
-        success: false,
         error: message,
     });
 };
