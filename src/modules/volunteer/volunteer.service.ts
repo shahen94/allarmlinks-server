@@ -1,6 +1,7 @@
 import {IVolunteer, Volunteer} from "./volunteer.model";
 import {VolunteerRegisterStepOneData, VolunteerRegisterStepTwoData,} from "./verification/verification.interfaces";
 import AppError from "../../errors/AppError";
+import {ClientSession} from "mongoose";
 
 const faker = require("faker");
 
@@ -119,7 +120,7 @@ export const validateAdditionalData = async (data: IVolunteer) => {
         throw new AppError(400, "Incorrect data provided.");
 };
 
-export const updateWithAdditionalData = async (data: IVolunteer) => {
+export const updateWithAdditionalData = async (data: IVolunteer, session: ClientSession) => {
     await validateAdditionalData(data);
 
     return Volunteer.findByIdAndUpdate(data._id, {
@@ -140,6 +141,7 @@ export const updateWithAdditionalData = async (data: IVolunteer) => {
     }, {
         new: true,
         runValidators: true,
+        session: session
     });
 };
 

@@ -1,6 +1,6 @@
 import {Tag, VolunteerTag} from "./tags.model";
 import AppError from "../../../errors/AppError";
-import mongoose from "mongoose";
+import mongoose, {ClientSession} from "mongoose";
 import {existsVolunteerById} from "../volunteer.service";
 
 export const addTag = async (name: string) => {
@@ -27,15 +27,17 @@ export const findTagByName = async (name: string) => {
     return Tag.findOne({name: name});
 }
 
-export const connectNewTagToVolunteer = async (volunteerId: string, name: string) => {
+export const connectNewTagToVolunteer = async (volunteerId: string, name: string, session: ClientSession) => {
     const tag = await addTag(name);
-    return await connectTagToVolunteer(volunteerId, tag._id);
+    return await connectTagToVolunteer(volunteerId, tag._id, session);
 }
 
-export const connectTagToVolunteer = async (volunteerId: string, tagId: string) => {
+export const connectTagToVolunteer = async (volunteerId: string, tagId: string, session: ClientSession) => {
     await VolunteerTag.create({
         volunteerId: volunteerId,
         tagId: tagId
+    }, {
+        session: session
     })
         // ignore duplicate errors
         .catch(err => {
@@ -45,21 +47,21 @@ export const connectTagToVolunteer = async (volunteerId: string, tagId: string) 
         });
 }
 
-export const connectNewTagsToVolunteer = async (volunteerId: string, tagNames: string[]) => {
+export const connectNewTagsToVolunteer = async (volunteerId: string, tagNames: string[], session: ClientSession) => {
     if (!await existsVolunteerById(volunteerId))
         throw new AppError(400, "Volunteer doesn't exist.");
 
     for (const name of tagNames) {
-        await connectNewTagToVolunteer(volunteerId, name);
+        await connectNewTagToVolunteer(volunteerId, name, session);
     }
 }
 
-export const connectTagsToVolunteer = async (volunteerId: string, tagIds: string[]) => {
+export const connectTagsToVolunteer = async (volunteerId: string, tagIds: string[], session: ClientSession) => {
     if (!await existsVolunteerById(volunteerId))
         throw new AppError(400, "Volunteer doesn't exist.");
 
     for (const id of tagIds) {
-        await connectTagToVolunteer(volunteerId, id);
+        await connectTagToVolunteer(volunteerId, id, session);
     }
 }
 

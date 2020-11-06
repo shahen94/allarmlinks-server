@@ -6,17 +6,17 @@ import {getVolunteerList} from "./volunteer.controller";
 
 const {Router} = require("express");
 const router = Router();
-const routeUrl = "volunteer";
-const tags = "tags";
 
-router.route("/" + routeUrl).get(getVolunteerList);
-router.route("/" + routeUrl)
+router.route("/").get(getVolunteerList);
 
 router.setupRoutes = (app: Application, prefix: string): void => {
-    verificationRouter.setupRoutes(router, prefix + routeUrl);
-    registrationRouter.setupRoutes(router, prefix + routeUrl);
-    tagsRouter.setupRoutes(router, prefix + routeUrl);
-    app.use(prefix, router);
+    const routeUrl = prefix + "/volunteer";
+
+    verificationRouter.setupRoutes(router, "/verification");
+    registrationRouter.setupRoutes(router, "/registration");
+    tagsRouter.setupRoutes(router, "/tags");
+
+    app.use(routeUrl, router);
 };
 
 export default router;

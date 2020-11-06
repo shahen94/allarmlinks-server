@@ -7,10 +7,9 @@ import errorHandler from "../../../utils/errorHandler";
 
 const {Router} = require("express");
 const router = Router();
-const routeUrl = "/registration";
 
-router.route(routeUrl + "/tags").get(getAllAvailableTags);
-router.route(routeUrl).post(acceptVolunteerAdditionalData);
+router.route("/tags").get(getAllAvailableTags);
+router.route("/").post(acceptVolunteerAdditionalData);
 router.use(errorHandler);
 
 router.setupRoutes = (app: Application, prefix: string): void => {

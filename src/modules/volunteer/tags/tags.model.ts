@@ -16,7 +16,7 @@ export interface IVolunteerTag extends Document {
 
 const VolunteerTagSchema: Schema = new mongoose.Schema({
     volunteerId: {type: mongoose.Schema.Types.ObjectId, ref: 'Volunteer', required: true},
-    tagId: {type: mongoose.Schema.Types.ObjectId, ref: 'Tag', unique: true, required: true},
+    tagId: {type: mongoose.Schema.Types.ObjectId, ref: 'Tag', required: true},
 });
 
 export const Tag = mongoose.model<ITag>("Tag", TagSchema);
