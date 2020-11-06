@@ -5,6 +5,7 @@ import path from "path";
 import errorHandler from "./utils/errorHandler";
 import glob from "glob";
 import connectDb from "./lib/dbConnection";
+import cors from "cors";
 
 const express = require("express");
 require("express-async-errors");
@@ -31,6 +32,7 @@ class App {
     }
 
     private addMiddlewares(): void {
+        this.app.use(cors());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
     }
