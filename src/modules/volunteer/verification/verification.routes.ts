@@ -9,7 +9,6 @@ router.route("/email").post(registerStepOne);
 router.route("/email/:token").get(verifyEmailToken);
 router.route("/phone").post(registerStepTwo);
 router.route("/phone/code").post(verifyPhoneCode);
-router.use(errorHandler);
 
 router.setupRoutes = (app: Application, prefix: string): void => {
     app.use(prefix, router);

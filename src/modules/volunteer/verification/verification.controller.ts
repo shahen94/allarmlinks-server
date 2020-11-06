@@ -24,7 +24,7 @@ export const registerStepOne = async function (
     });
 
     const token = jwt.sign(
-        {id: volunteer._id},
+        {id: volunteer._id, name: name, surname: surname, email: email},
         `${process.env.JWT_SECRET_KEY}`,
         {
             expiresIn: "1d",
@@ -47,7 +47,7 @@ export const verifyEmailToken = async function (req: Request, res: Response): Pr
 
     updateMailVerificationStatus(decoded.id).then(() =>
         res.status(200).json({
-            data: {id: decoded.id},
+            data: decoded,
         })
     );
 };

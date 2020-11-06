@@ -5,7 +5,6 @@ import {getAllAvailableTagsForVolunteer} from "./tags.controller";
 const {Router} = require("express");
 const router = Router();
 
-router.use(errorHandler);
 router.route("/").get(getAllAvailableTagsForVolunteer);
 
 router.setupRoutes = (app: Application, prefix: string): void => {

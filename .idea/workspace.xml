@@ -21,9 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4d4d4cc7-1118-428c-b580-79be10c60aa9" name="Default Changelist" comment="Added transactions to registration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dbConnection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dbConnection.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.routes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +39,9 @@
         <option value="TypeScript File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="dev" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">

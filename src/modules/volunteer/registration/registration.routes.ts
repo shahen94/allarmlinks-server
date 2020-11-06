@@ -10,7 +10,6 @@ const router = Router();
 
 router.route("/tags").get(getAllAvailableTags);
 router.route("/").post(acceptVolunteerAdditionalData);
-router.use(errorHandler);
 
 router.setupRoutes = (app: Application, prefix: string): void => {
     app.use(prefix, router);
