@@ -33,10 +33,10 @@ export const connectNewTagToVolunteer = async (volunteerId: string, name: string
 }
 
 export const connectTagToVolunteer = async (volunteerId: string, tagId: string, session: ClientSession) => {
-    await VolunteerTag.create({
+    await VolunteerTag.create([{
         volunteerId: volunteerId,
         tagId: tagId
-    }, {
+    }], {
         session: session
     })
         // ignore duplicate errors

@@ -8,6 +8,7 @@ import {
 import {IVolunteer} from "../volunteer.model";
 import {updateWithAdditionalData} from "../volunteer.service";
 import * as mongoose from "mongoose";
+import {getDB} from "../../../lib/dbConnection";
 
 export const getAllAvailableTags = async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json(await getAllTags());
@@ -18,7 +19,8 @@ export const acceptVolunteerAdditionalData = async (req: Request, res: Response,
     const defaultTagsId = req.body.defaultTagsId as string[];
     const addedTags = req.body.addedTags as string[];
 
-    const session = await mongoose.startSession();
+    // @ts-ignore
+    const session = await getDB().startSession();
     session.startTransaction();
 
     await containsIds(defaultTagsId)
