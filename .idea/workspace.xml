@@ -20,17 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d4d4cc7-1118-428c-b580-79be10c60aa9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/errors/BadRequestError.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/verification/verification.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/verification/verification.interfaces.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/verification/verification.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/verification/volunteers.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/admin/admin.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/admin/admin.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/admin/admin.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/verification/verification.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/verification/verification.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/example.env" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/example.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/errors/AppError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/AppError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/errors/BadRequestError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/BadRequestError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/errorHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/errorHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +47,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1jmKVyMNvuKuV00vpnb8aslqGw3" />
@@ -91,6 +96,11 @@
       <workItem from="1604487644563" duration="12434000" />
       <workItem from="1604509286459" duration="5773000" />
       <workItem from="1604556328060" duration="2593000" />
+      <workItem from="1604562305501" duration="8466000" />
+      <workItem from="1604608426060" duration="4000" />
+      <workItem from="1604648890583" duration="18000" />
+      <workItem from="1604648911018" duration="99000" />
+      <workItem from="1604677348835" duration="44000" />
     </task>
     <servers />
   </component>
@@ -115,6 +125,10 @@
     </state>
     <state x="525" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1604404957390" />
     <state x="656" y="296" width="525" height="404" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1604405222518" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1604677390747">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604677390747" />
     <state x="677" y="474" width="565" height="174" key="GitCloneDialog" timestamp="1604511443594">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -143,9 +157,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="576" y="339" width="986" height="741" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1604500140689" />
-    <state x="558" y="320" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604417869801">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state x="446" y="229" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604563884857">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="446" y="229" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1604563884857" />
     <state x="558" y="320" width="800" height="539" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1604417869801" />
   </component>
 </project>
