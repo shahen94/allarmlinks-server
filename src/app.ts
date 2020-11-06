@@ -44,8 +44,7 @@ class App {
             routes
                 .map((filename) => require(`./${filename}`).default)
                 .forEach((router) => {
-                    router.setupRoutes(this.app, process.env.BASE_URL);
-                    router.use(errorHandler);
+                    router.setupRoutes(this.app, process.env.BASE_URL ? "" : `${process.env.BASE_URL}`);
                 });
         });
     }
