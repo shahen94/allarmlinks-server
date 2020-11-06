@@ -3,13 +3,17 @@ import {Document, Schema} from "mongoose";
 
 type Nullable<T> = T | null;
 
+export const STATUS_INITIALIZED = "initialized";
+export const STATUS_EMAIL_VERIFIED = "email verified";
+export const STATUS_PHONE_VERIFIED = "phone verified";
+export const STATUS_FINISHED = "finished";
+
 export interface IVolunteer extends Document {
     name: string,
     surname: string,
     email: string,
     phone?: Nullable<string>,
-    isMailVerified?: boolean,
-    isPhoneVerified?: boolean,
+    status?: string,
     birthDate?: string,
     country?: string,
     city?: string,
@@ -34,8 +38,7 @@ const VolunteerSchema: Schema = new mongoose.Schema({
     surname: String,
     email: {type: String, trim: true, index: true, unique: true, sparse: true},
     phone: {type: String, trim: true, index: true, unique: true, sparse: true, default: undefined},
-    isMailVerified: {type: Boolean, default: false},
-    isPhoneVerified: {type: Boolean, default: false},
+    status: {type: String, default: STATUS_INITIALIZED},
     birthDate: String,
     country: String,
     city: String,
@@ -56,3 +59,8 @@ const VolunteerSchema: Schema = new mongoose.Schema({
 });
 
 export const Volunteer = mongoose.model<IVolunteer>("Volunteer", VolunteerSchema);
+
+export interface IFilterQuery {
+    field: string,
+    exp: string
+};

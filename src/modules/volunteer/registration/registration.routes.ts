@@ -9,9 +9,10 @@ const {Router} = require("express");
 const router = Router();
 
 router.route("/tags").get(getAllAvailableTags);
-router.route("/").post(acceptVolunteerAdditionalData);
+router.route("/:token").post(acceptVolunteerAdditionalData);
 
 router.setupRoutes = (app: Application, prefix: string): void => {
+    router.use(errorHandler);
     app.use(prefix, router);
 };
 

@@ -7,10 +7,11 @@ const router = Router();
 
 router.route("/email").post(registerStepOne);
 router.route("/email/:token").get(verifyEmailToken);
-router.route("/phone").post(registerStepTwo);
-router.route("/phone/code").post(verifyPhoneCode);
+router.route("/phone/:token").post(registerStepTwo);
+router.route("/phone/code/:token").post(verifyPhoneCode);
 
 router.setupRoutes = (app: Application, prefix: string): void => {
+    router.use(errorHandler);
     app.use(prefix, router);
 };
 

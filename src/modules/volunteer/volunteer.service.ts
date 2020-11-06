@@ -1,4 +1,11 @@
-import {IVolunteer, Volunteer} from "./volunteer.model";
+import {
+    IFilterQuery,
+    IVolunteer,
+    STATUS_EMAIL_VERIFIED,
+    STATUS_FINISHED,
+    STATUS_PHONE_VERIFIED,
+    Volunteer
+} from "./volunteer.model";
 import {VolunteerRegisterStepOneData, VolunteerRegisterStepTwoData,} from "./verification/verification.interfaces";
 import AppError from "../../errors/AppError";
 import {ClientSession} from "mongoose";
@@ -12,12 +19,7 @@ export const validateVolunteerRegisterDataStepOne = async function (
 ) {
     await volunteerStepOneDataValidation.validateAsync(data);
 
-    let volunteer = await Volunteer.findOne({email: data.email});
-    if (volunteer && volunteer.isMailVerified) {
-        throw new AppError(400, "Email is already used.");
-    }
-
-    return volunteer;
+    return Volunteer.findOne({email: data.email});
 };
 
 export const volunteerStepOneDataValidation = Joi.object({
@@ -27,8 +29,7 @@ export const volunteerStepOneDataValidation = Joi.object({
 });
 
 export const volunteerPhoneValidation = Joi.object({
-    phone: Joi.string().phoneNumber(),
-    id: Joi.string(),
+    phone: Joi.string().phoneNumber()
 });
 
 export const createVolunteerForRegisterStepOne = async function (
@@ -36,7 +37,7 @@ export const createVolunteerForRegisterStepOne = async function (
 ) {
     let volunteer = await validateVolunteerRegisterDataStepOne(data);
     if (!volunteer) {
-        volunteer = await Volunteer.create({
+        return await Volunteer.create({
             name: data.name,
             surname: data.surname,
             email: data.email,
@@ -46,31 +47,16 @@ export const createVolunteerForRegisterStepOne = async function (
     return volunteer;
 };
 
-export const checkIfVolunteerEmailVerifiedById = async function (
-    id: string
-): Promise<boolean> {
-    const volunteer = await Volunteer.findById(id);
-    return !!(volunteer && volunteer.isMailVerified);
-};
-
 export const validateVolunteerRegisterDataStepTwo = async function (
     data: VolunteerRegisterStepTwoData
 ): Promise<void> {
     await volunteerPhoneValidation.validateAsync(data);
-
-    if (data && data.isPhoneVerified) {
-        throw new AppError(400, "Phone is already used.");
-    }
-
-    if (!(await checkIfVolunteerEmailVerifiedById(data.id))) {
-        throw new AppError(400, "Email is not verified.");
-    }
 };
 
 export const updateMailVerificationStatus = function (id: string) {
     return Volunteer.findByIdAndUpdate(
         id,
-        {isMailVerified: true},
+        {status: STATUS_EMAIL_VERIFIED},
         {
             new: true,
             runValidators: true,
@@ -85,7 +71,7 @@ export const updatePhoneVerificationStatus = function (
     return Volunteer.findByIdAndUpdate(
         id,
         {
-            isPhoneVerified: true,
+            status: STATUS_PHONE_VERIFIED,
             phone: phone,
         },
         {
@@ -137,7 +123,8 @@ export const updateWithAdditionalData = async (data: IVolunteer, session: Client
         linkedinProfile: data.linkedinProfile,
         twitterProfile: data.twitterProfile,
         whereToVolunteer: data.whereToVolunteer,
-        other: data.other
+        other: data.other,
+        status: STATUS_FINISHED
     }, {
         new: true,
         runValidators: true,
@@ -145,7 +132,7 @@ export const updateWithAdditionalData = async (data: IVolunteer, session: Client
     });
 };
 
-export const getVolunteers = async (volunteerId: string, limit: number) => {
+export const getVolunteers = async (volunteerId: any, limit: number, filter: IFilterQuery[]) => {
     if (volunteerId)
         return Volunteer.find({'_id': {'$gt': volunteerId}}).sort({'_id': 1}).limit(limit);
     else
@@ -158,14 +145,13 @@ export const createDummyVolunteer = async () => {
     const phone = faker.phone.phoneNumber();
 
     const volunteer = {
-        "isMailVerified": true,
-        "isPhoneVerified": true,
         "name": name,
         "surname": surname,
         "email": email,
         "phone": phone,
         "city": "Yerevan",
         "country": "Armenia",
+        "status": STATUS_FINISHED
     };
 
     return Volunteer.create(volunteer);
@@ -175,3 +161,25 @@ export const createDummyData = async (limit: number) => {
     for (let i = 0; i < limit; i++)
         await createDummyVolunteer();
 }
+
+// interface  IConditions {
+//     [key: stirng] : string
+// }
+//
+// data = Volunteer.find({}));
+//
+// export const searchByField = async (data:query: IFilterQuery) => {
+//     return Volunteer.find({
+//         [query.field]: query.exp
+//     });
+// }
+//
+// export const filterByFields = async (queries: IFilterQuery[]) => {
+//     if (queries.length > 1) {
+//         let result = await searchByField(queries[0]);
+//         for (let i = 1; i < queries.length; i++)
+//             result = await searchByField(result, queries[i]);
+//         return result;
+//     }
+//     return [];
+// }

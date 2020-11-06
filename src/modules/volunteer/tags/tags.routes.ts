@@ -8,6 +8,7 @@ const router = Router();
 router.route("/").get(getAllAvailableTagsForVolunteer);
 
 router.setupRoutes = (app: Application, prefix: string): void => {
+    router.use(errorHandler);
     app.use(prefix, router);
 };
 

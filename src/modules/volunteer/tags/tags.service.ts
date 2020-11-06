@@ -1,4 +1,4 @@
-import {Tag, VolunteerTag} from "./tags.model";
+import {CreateVolunteerTag, Tag, VolunteerTag} from "./tags.model";
 import AppError from "../../../errors/AppError";
 import mongoose, {ClientSession} from "mongoose";
 import {existsVolunteerById} from "../volunteer.service";
@@ -60,9 +60,11 @@ export const connectTagsToVolunteer = async (volunteerId: string, tagIds: string
     if (!await existsVolunteerById(volunteerId))
         throw new AppError(400, "Volunteer doesn't exist.");
 
-    for (const id of tagIds) {
-        await connectTagToVolunteer(volunteerId, id, session);
-    }
+    const entries: CreateVolunteerTag[] = [];
+    tagIds.forEach((id) => entries.push({
+        volunteerId: volunteerId,
+        tagId: id
+    }));
 }
 
 const getTagsPipeline = (volunteerId: string) => {

@@ -9,6 +9,11 @@ const TagSchema: Schema = new mongoose.Schema({
     name: {type: String, required: true}
 });
 
+export interface CreateVolunteerTag {
+    volunteerId: string
+    tagId: string
+}
+
 export interface IVolunteerTag extends Document {
     volunteerId: string
     tagId: string

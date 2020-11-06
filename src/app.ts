@@ -29,6 +29,8 @@ class App {
         await connectDb();
         this.addMiddlewares();
         this.addRoutes();
+
+        this.app.use(errorHandler);
     }
 
     private addMiddlewares(): void {
