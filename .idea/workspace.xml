@@ -19,14 +19,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d4d4cc7-1118-428c-b580-79be10c60aa9" name="Default Changelist" comment="Added Phone and Mail verification">
-      <change afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" afterDir="false" />
+    <list default="true" id="4d4d4cc7-1118-428c-b580-79be10c60aa9" name="Default Changelist" comment="Added tags and registration modules">
+      <change afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,6 +72,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -95,7 +102,8 @@
       <workItem from="1604561233355" duration="168000" />
       <workItem from="1604563908618" duration="7419000" />
       <workItem from="1604577678563" duration="772000" />
-      <workItem from="1604578698578" duration="7535000" />
+      <workItem from="1604578698578" duration="8272000" />
+      <workItem from="1604635774733" duration="3837000" />
     </task>
     <task id="LOCAL-00001" summary="Added Phone and Mail verification">
       <created>1604561278673</created>
@@ -104,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604561278673</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added tags and registration modules">
+      <created>1604586339749</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604586339749</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,7 +139,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Phone and Mail verification" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Phone and Mail verification" />
+    <MESSAGE value="Added tags and registration modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tags and registration modules" />
   </component>
   <component name="WindowStateProjectService">
     <state x="656" y="296" width="525" height="404" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604405222518">
@@ -136,6 +152,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="770" y="273" width="376" height="575" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1604581334414" />
+    <state x="707" y="401" width="502" height="320" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1604586276110">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="707" y="401" width="502" height="320" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.27.1920.1053@0.27.1920.1053" timestamp="1604586276110" />
     <state x="677" y="474" width="565" height="174" key="GitCloneDialog" timestamp="1604511443594">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -164,9 +184,9 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="576" y="339" width="986" height="741" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1604500140689" />
-    <state x="558" y="312" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604563955876">
+    <state x="558" y="308" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604586351027">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="558" y="312" width="800" height="539" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1604563955876" />
+    <state x="558" y="308" width="800" height="539" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1604586351027" />
   </component>
 </project>

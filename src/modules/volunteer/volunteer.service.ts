@@ -1,7 +1,8 @@
 import {IVolunteer, Volunteer} from "./volunteer.model";
 import {VolunteerRegisterStepOneData, VolunteerRegisterStepTwoData,} from "./verification/verification.interfaces";
-
 import AppError from "../../errors/AppError";
+
+const faker = require("faker");
 
 const Joi = require("joi").extend(require("joi-phone-number"));
 
@@ -141,3 +142,34 @@ export const updateWithAdditionalData = async (data: IVolunteer) => {
         runValidators: true,
     });
 };
+
+export const getVolunteers = async (volunteerId: string, limit: number) => {
+    if (volunteerId)
+        return Volunteer.find({'_id': {'$gt': volunteerId}}).sort({'_id': 1}).limit(limit);
+    else
+        return Volunteer.find({}).sort({'_id': 1}).limit(limit);
+}
+
+export const createDummyVolunteer = async () => {
+    const [name, surname] = faker.name.findName().split(" ");
+    const email = faker.internet.email();
+    const phone = faker.phone.phoneNumber();
+
+    const volunteer = {
+        "isMailVerified": true,
+        "isPhoneVerified": true,
+        "name": name,
+        "surname": surname,
+        "email": email,
+        "phone": phone,
+        "city": "Yerevan",
+        "country": "Armenia",
+    };
+
+    return Volunteer.create(volunteer);
+}
+
+export const createDummyData = async (limit: number) => {
+    for (let i = 0; i < limit; i++)
+        await createDummyVolunteer();
+}

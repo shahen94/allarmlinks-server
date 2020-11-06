@@ -99,9 +99,13 @@ const getTagsPipeline = (volunteerId: string) => {
     ];
 }
 
-export const getTagsForVolunteer = async (volunteerId: string) => {
+export const getTagsForVolunteer = (volunteerId: string) => {
     return VolunteerTag.aggregate(getTagsPipeline(volunteerId));
 };
+
+export const getAllTags = () => {
+    return Tag.find({});
+}
 
 export const containsIds = async (tagIds: string[]): Promise<boolean> => {
     const tags = await Tag.find({_id: {$in: tagIds}});

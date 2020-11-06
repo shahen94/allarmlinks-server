@@ -1,12 +1,14 @@
 import {NextFunction, Request, Response} from "express";
 import jwt from "jsonwebtoken";
 import {
+    checkIfVolunteerEmailVerifiedById,
     createVolunteerForRegisterStepOne,
     updateMailVerificationStatus,
     validateVolunteerRegisterDataStepTwo,
 } from "../volunteer.service";
 
 import {sendEmailToken, sendSecureCodeToPhone, verifyVolunteerPhone,} from "./verification.service";
+import AppError from "../../../errors/AppError";
 
 export const registerStepOne = async function (
     req: Request,
@@ -39,6 +41,9 @@ export const verifyEmailToken = async function (req: Request, res: Response): Pr
         req.params.token,
         `${process.env.JWT_SECRET_KEY}`
     );
+
+    if (await checkIfVolunteerEmailVerifiedById(decoded.id))
+        throw new AppError(400, "Email is already verified.");
 
     updateMailVerificationStatus(decoded.id).then(() =>
         res.status(200).json({
