@@ -12,6 +12,7 @@ import {
 
 const { Router } = require("express");
 const router = Router();
+
 const routeUrl = "admin";
 
 router.route("/login").post(login);
@@ -28,6 +29,8 @@ router
   .get(gettingDataAdmin)
   .put(editingAdmin)
   .delete(deletingAdmin);
+
+router.get((req: Request, res: Response) => res.send("2156"))
 
 router.setupRoutes = (app: Application, prefix: string): void => {
   app.use(prefix + routeUrl, router);

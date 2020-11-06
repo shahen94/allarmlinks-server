@@ -23,15 +23,27 @@
       <change afterPath="$PROJECT_DIR$/src/modules/admin/admin.controller.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/modules/admin/admin.model.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/modules/admin/admin.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/errors/EmailAlreadyUsedError.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/errors/EmailAlreadyVerified.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/example.env" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/example.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/errors/AppError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/AppError.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/errors/BadRequestError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/BadRequestError.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/errorHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/errorHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.interfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.service.ts" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +57,9 @@
         <option value="TypeScript File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="dev" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -70,6 +85,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -96,12 +112,63 @@
       <workItem from="1604487644563" duration="12434000" />
       <workItem from="1604509286459" duration="5773000" />
       <workItem from="1604556328060" duration="2593000" />
+
       <workItem from="1604562305501" duration="8466000" />
       <workItem from="1604608426060" duration="4000" />
       <workItem from="1604648890583" duration="18000" />
       <workItem from="1604648911018" duration="99000" />
       <workItem from="1604677348835" duration="44000" />
+
+      <workItem from="1604561233355" duration="168000" />
+      <workItem from="1604563908618" duration="7419000" />
+      <workItem from="1604577678563" duration="772000" />
+      <workItem from="1604578698578" duration="8272000" />
+      <workItem from="1604635774733" duration="9489000" />
     </task>
+    <task id="LOCAL-00001" summary="Added Phone and Mail verification">
+      <created>1604561278673</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604561278673</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added tags and registration modules">
+      <created>1604586339749</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604586339749</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added feature &quot;Volunteer List&quot;">
+      <created>1604643239046</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1604643239047</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added transactions to registration">
+      <created>1604647645704</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604647645704</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated verification email token structure">
+      <created>1604652590158</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604652590158</updated>
+
+    </task>
+    <task id="LOCAL-00006" summary="Added cors">
+      <created>1604653654024</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1604653654024</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,16 +186,35 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Phone and Mail verification" />
+    <MESSAGE value="Added tags and registration modules" />
+    <MESSAGE value="Added feature &quot;Volunteer List&quot;" />
+    <MESSAGE value="Added transactions to registration" />
+    <MESSAGE value="Updated verification email token structure" />
+    <MESSAGE value="Added cors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added cors" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="656" y="296" width="525" height="404" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604405222518">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="525" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1604404957390" />
     <state x="656" y="296" width="525" height="404" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1604405222518" />
+
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1604677390747">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604677390747" />
+    <state x="770" y="273" width="376" height="575" key="#com.intellij.ide.util.MemberChooser" timestamp="1604581334414">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="770" y="273" width="376" height="575" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1604581334414" />
+    <state x="707" y="401" width="502" height="320" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1604586276110">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="707" y="401" width="502" height="320" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.27.1920.1053@0.27.1920.1053" timestamp="1604586276110" />
+
     <state x="677" y="474" width="565" height="174" key="GitCloneDialog" timestamp="1604511443594">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -157,10 +243,21 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="576" y="339" width="986" height="741" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1604500140689" />
+
     <state x="446" y="229" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604563884857">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="446" y="229" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1604563884857" />
     <state x="558" y="320" width="800" height="539" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1604417869801" />
+
+    <state x="558" y="292" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604653659873">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="558" y="292" width="800" height="539" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1604653659873" />
+    <state x="667" y="149" width="586" height="804" key="find.popup" timestamp="1604669793930">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="667" y="149" width="586" height="804" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1604669793930" />
+
   </component>
 </project>

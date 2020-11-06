@@ -7,7 +7,5 @@ export interface VolunteerRegisterStepOneData {
 
 export interface VolunteerRegisterStepTwoData {
     phone: string,
-    id: string,
     code?: string,
-    isPhoneVerified?: string
 }

@@ -5,7 +5,9 @@ import path from "path";
 import errorHandler from "./utils/errorHandler";
 import glob from "glob";
 import connectDb from "./lib/dbConnection";
+
 import adminService from "./modules/admin/admin.service";
+import cors from "cors";
 
 const express = require("express");
 require("express-async-errors");
@@ -30,9 +32,12 @@ class App {
     await this.initAdminData();
     this.addMiddlewares();
     this.addRoutes();
+
+    this.app.use(errorHandler);
   }
 
   private addMiddlewares(): void {
+    this.app.use(cors());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
   }
@@ -42,10 +47,14 @@ class App {
       if (err) {
         throw err;
       }
+
       routes
         .map((filename) => require(`./${filename}`).default)
         .forEach((router) => {
-          router.setupRoutes(this.app, process.env.BASE_URL);
+          router.setupRoutes(
+            this.app,
+            process.env.BASE_URL ? "" : `${process.env.BASE_URL}`
+          );
           router.use(errorHandler);
         });
     });

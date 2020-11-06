@@ -1,15 +1,11 @@
 import {Application} from "express";
-import {
-    acceptVolunteerAdditionalData,
-    getAllAvailableTags,
-} from "./registration.controller";
 import errorHandler from "../../../utils/errorHandler";
+import {getAllAvailableTagsForVolunteer} from "./tags.controller";
 
 const {Router} = require("express");
 const router = Router();
 
-router.route("/tags").get(getAllAvailableTags);
-router.route("/:token").post(acceptVolunteerAdditionalData);
+router.route("/").get(getAllAvailableTagsForVolunteer);
 
 router.setupRoutes = (app: Application, prefix: string): void => {
     router.use(errorHandler);
