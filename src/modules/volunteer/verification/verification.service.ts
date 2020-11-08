@@ -22,7 +22,7 @@ export const sendEmailToken = function (
 ) {
     const msg = {
         to: email,
-        from: "newapple4g@gmail.com",
+        from: `${process.env.FROM_EMAIL}`,
         dynamic_template_data: {
             receiverName: name,
             tokenUrl: `${process.env.HEROKU_URL}/verification/email/${token}`,
