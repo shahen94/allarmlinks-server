@@ -71,7 +71,7 @@ export const deleteGeneralAdmin = async (
     res: Response
 ): Promise<Response> => {
     await adminService.deleteGeneralAdmin(req.params.id);
-    return res.status(200).json({message: "Deleted!"});
+    return res.status(200).json({id:req.params.id});
 };
 
 export const getGeneralAdminData = async (

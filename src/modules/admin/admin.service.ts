@@ -1,5 +1,6 @@
 import {Admin} from "./admin.model";
 import {IAdmin} from "./admin.interfaces";
+import {createToken} from "../../utils/tokenUtils"
 import bcrypt from "bcrypt";
 import NotFoundError from "../../errors/NotFoundError";
 import BadRequestError from "../../errors/BadRequestError";
@@ -28,7 +29,7 @@ class AdminService {
             false
         );
         adminData.isCorrectPassword(loggedPassword);
-        const accessToken = adminData.generateJwt();
+        const accessToken = createToken(adminData._id);
         return {adminData, accessToken};
     };
 

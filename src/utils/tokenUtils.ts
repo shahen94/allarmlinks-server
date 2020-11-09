@@ -4,18 +4,18 @@ const jwt = require("jsonwebtoken");
 
 export const getDecoded = (token: string): any => {
     try {
-        let decoded = jwt.verify(
+        return jwt.verify(
             token,
             `${process.env.JWT_SECRET_KEY}`
         );
-        return decoded;
+
     } catch (ignored) {
         throw new UnauthorizedRequestError("Unauthorized!");
     }
 };
 
 export const createToken = (id: string): string => {
-    return jwt.sign({id}, `${process.env.JWT_SECRET_KEY}`, {
+    return jwt.sign({_id:id}, `${process.env.JWT_SECRET_KEY}`, {
         expiresIn: '1d',
     });
 }

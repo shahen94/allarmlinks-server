@@ -5,7 +5,6 @@ import UnauthorizedRequestError from "../../errors/UnauthorizedRequestError";
 import AppError from "../../errors/AppError";
 import {getDecoded} from "../../utils/tokenUtils";
 
-
 const authorize = async (req: authRequest, _: Response, next: NextFunction): Promise<void> => {
     let token = req.headers["x-access-token"];
 
