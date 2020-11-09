@@ -19,20 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d4d4cc7-1118-428c-b580-79be10c60aa9" name="Default Changelist" comment="">
+    <list default="true" id="4d4d4cc7-1118-428c-b580-79be10c60aa9" name="Default Changelist" comment="Fixed some issues">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/AppError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/AppError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/BadRequestError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/BadRequestError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors/NotFoundError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/NotFoundError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/admin/auth.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/auth.middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/admin/validationSchemas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/validationSchemas.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/errorHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/errorHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,10 +176,6 @@
     </state>
     <state x="525" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1604404957390" />
     <state x="656" y="296" width="525" height="404" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1604405222518" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1604677390747">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604677390747" />
     <state x="770" y="273" width="376" height="575" key="#com.intellij.ide.util.MemberChooser" timestamp="1604581334414">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -200,6 +184,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="707" y="401" width="502" height="320" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.27.1920.1053@0.27.1920.1053" timestamp="1604586276110" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1604677390747">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604677390747" />
     <state x="677" y="474" width="565" height="174" key="GitCloneDialog" timestamp="1604511443594">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -228,14 +216,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="576" y="339" width="986" height="741" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1604500140689" />
-    <state x="446" y="229" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604563884857">
+    <state x="446" y="229" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604899241148">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="446" y="229" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1604563884857" />
-    <state x="558" y="320" width="800" height="539" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1604417869801" />
-    <state x="558" y="292" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604653659873">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
+    <state x="446" y="229" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1604899241148" />
     <state x="558" y="292" width="800" height="539" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1604653659873" />
     <state x="667" y="149" width="586" height="804" key="find.popup" timestamp="1604669793930">
       <screen x="0" y="27" width="1920" height="1053" />
