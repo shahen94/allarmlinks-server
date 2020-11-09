@@ -6,7 +6,7 @@ export interface ITag extends Document {
 }
 
 const TagSchema: Schema = new mongoose.Schema({
-    name: {type: String, required: true}
+    name: {type: String, required: true, unique: true}
 });
 
 export interface CreateVolunteerTag {

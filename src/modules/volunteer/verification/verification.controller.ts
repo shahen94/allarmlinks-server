@@ -52,7 +52,9 @@ export const verifyEmailToken = async function (req: Request, res: Response): Pr
     let status = volunteer.status;
 
     if (volunteer.status != STATUS_FINISHED) {
-        await updateMailVerificationStatus(decoded.id);
+        console.log(decoded.id);
+        let tmp = await updateMailVerificationStatus(decoded.id);
+        console.log(tmp?.status);
         status = STATUS_EMAIL_VERIFIED;
     }
 

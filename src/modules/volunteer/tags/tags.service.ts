@@ -65,6 +65,8 @@ export const connectTagsToVolunteer = async (volunteerId: string, tagIds: string
         volunteerId: volunteerId,
         tagId: id
     }));
+
+    return VolunteerTag.create(entries, {session: session});
 }
 
 const getTagsPipeline = (volunteerId: string) => {
@@ -113,5 +115,5 @@ export const getAllTags = () => {
 
 export const containsIds = async (tagIds: string[]): Promise<boolean> => {
     const tags = await Tag.find({_id: {$in: tagIds}});
-    return tags.length === tagIds.length;
+    return (tagIds.length === 0 && !tags) || tags.length === tagIds.length;
 }

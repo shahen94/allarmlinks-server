@@ -88,22 +88,16 @@ export const existsVolunteerById = async (volunteerId: string): Promise<boolean>
 
 export const validateAdditionalData = async (data: IVolunteer) => {
     const volunteer = await Volunteer.findById(data._id);
+    console.log(data._id);
+    console.log(volunteer);
     if (!volunteer)
         throw new AppError(400, "Volunteer doesn't exist");
 
+    if (volunteer.status != STATUS_PHONE_VERIFIED)
+        throw new AppError(400, "Invalid status.");
+
     if (!data.country || !data.city)
         throw new AppError(400, "Country and City fields are required");
-
-    await volunteerStepOneDataValidation.validateAsync({name: data.name, surname: data.surname, email: data.email});
-
-    if (!data.phone)
-        throw new AppError(400, "Phone is not valid.");
-
-    await volunteerPhoneValidation.validateAsync({phone: data.phone, id: data._id});
-
-    if (volunteer._id != data._id || volunteer.email != data.email || volunteer.name != data.name
-        || volunteer.surname != data.surname || volunteer.phone != data.phone)
-        throw new AppError(400, "Incorrect data provided.");
 };
 
 export const updateWithAdditionalData = async (data: IVolunteer, session: ClientSession) => {
