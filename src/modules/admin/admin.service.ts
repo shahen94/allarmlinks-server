@@ -11,29 +11,25 @@ class AdminService {
         email: string,
         password: string,
         type: string = "general"
-    ): Promise<{ message: string }> => {
+    ): Promise<void> => {
         const hashedPass = bcrypt.hashSync(password, 10);
         await Admin.create({name, surname, email, password: hashedPass, type});
-        return {message: "Added!"};
     };
 
     getDataWithJwt = async (
         loggedEmail: string,
         loggedPassword: string
     ): Promise<{
-        data: {
-            name: string;
-            surname: string;
-            email: string;
-            type: string;
-        };
+        adminData: IAdmin;
         accessToken: string;
     }> => {
-        const adminData = await this.errorIfDataNotFound({email: loggedEmail});
+        const adminData = await this.errorIfDataNotFound(
+            {email: loggedEmail},
+            false
+        );
         adminData.isCorrectPassword(loggedPassword);
         const accessToken = adminData.generateJwt();
-        const {name, surname, email, type} = adminData;
-        return {data: {name, surname, email, type}, accessToken};
+        return {adminData, accessToken};
     };
 
     errorIfDataExists = async (condition: object): Promise<void> => {
@@ -42,54 +38,43 @@ class AdminService {
             throw new BadRequestError(`${Object.keys(condition)[0]} already exists`);
     };
 
-    errorIfDataNotFound = async (condition: object): Promise<IAdmin> => {
+    errorIfDataNotFound = async (
+        condition: object,
+        get: boolean
+    ): Promise<IAdmin> => {
         const data = await Admin.findOne(condition);
-        if (!data)
-            throw new NotFoundError(`${Object.keys(condition)[0]} not found`);
+        if (!data) {
+            if (get)
+                throw new NotFoundError(`${Object.keys(condition)[0]} not found`);
+            else throw new BadRequestError(`${Object.keys(condition)[0]} not found`);
+        }
         return data;
     };
 
-    getProfileData = () => {
-        // getting volunteers data and sending the type
-        return {data: {}};
-    };
-
-    getGeneralAdmins = async (): Promise<{ data: IAdmin[] }> => {
-        const data = await Admin.find({type: "general"});
-        return {data};
+    getGeneralAdmins = async (): Promise<IAdmin[]> => {
+        return Admin.find({type: "general"});
     };
 
     editGeneralAdmin = async (
         adminId: string,
         editedData: object
-    ): Promise<{
-        data: IAdmin;
-    }> => {
+    ): Promise<IAdmin> => {
         const data = await Admin.findByIdAndUpdate(adminId, editedData, {
             new: true,
             runValidators: true,
         });
         if (!data) throw new NotFoundError("Admin not found");
-        return {data};
+        return data;
     };
 
-    deleteGeneralAdmin = async (
-        adminId: string
-    ): Promise<{
-        message: string;
-    }> => {
+    deleteGeneralAdmin = async (adminId: string): Promise<void> => {
         const adminToBeDeleted = await Admin.findByIdAndDelete(adminId);
         if (!adminToBeDeleted) throw new NotFoundError("Admin not found");
-        return {message: "Deleted!"};
     };
 
-    getGeneralAdminData = async (
-        adminId: string
-    ): Promise<{
-        data: IAdmin;
-    }> => {
-        const data = await this.errorIfDataNotFound({_id: adminId});
-        return {data};
+    getGeneralAdminData = async (adminId: string): Promise<IAdmin> => {
+        return await this.errorIfDataNotFound({_id: adminId}, true);
+
     };
 }
 

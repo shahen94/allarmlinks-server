@@ -6,9 +6,11 @@ import {
     editGeneralAdmin,
     getGeneralAdminData,
     getGeneralAdmins,
+    getVolunteerData,
+    getVolunteersList,
     login,
-    profile,
 } from "./admin.controller";
+
 
 const {Router} = require("express");
 
@@ -16,7 +18,9 @@ const router = Router();
 const routeUrl = "/admin";
 
 router.route("/login").post(login);
-router.route("/profile").get(authJwt.authorize, profile);
+router.route("/volunteers").get(authJwt.authorize, getVolunteersList);
+router.route("/volunteers/:id").get(authJwt.authorize, getVolunteerData);
+
 router
     .route("/addAdmin")
     .post([authJwt.authorize, authJwt.authenticate], addGeneralAdmin);

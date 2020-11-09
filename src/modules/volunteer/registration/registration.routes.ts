@@ -1,8 +1,5 @@
 import {Application} from "express";
-import {
-    acceptVolunteerAdditionalData,
-    getAllAvailableTags,
-} from "./registration.controller";
+import {acceptVolunteerAdditionalData, getAllAvailableTags,} from "./registration.controller";
 import errorHandler from "../../../utils/errorHandler";
 
 const {Router} = require("express");

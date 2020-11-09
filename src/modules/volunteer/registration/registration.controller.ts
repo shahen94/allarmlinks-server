@@ -3,8 +3,8 @@ import {connectNewTagsToVolunteer, connectTagsToVolunteer, containsIds, getAllTa
 import {IVolunteer, STATUS_FINISHED} from "../volunteer.model";
 import {updateWithAdditionalData} from "../volunteer.service";
 import {getDB} from "../../../lib/dbConnection";
-import jwt from "jsonwebtoken";
 import AppError from "../../../errors/AppError";
+import {getDecoded} from "../../../utils/tokenUtils";
 
 export const getAllAvailableTags = async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json(await getAllTags());
@@ -13,10 +13,7 @@ export const getAllAvailableTags = async (req: Request, res: Response, next: Nex
 export const acceptVolunteerAdditionalData = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.params.token;
 
-    const decoded: any = jwt.verify(
-        token,
-        `${process.env.JWT_SECRET_KEY}`
-    );
+    const decoded = getDecoded(token);
 
     const data = req.body as IVolunteer;
     data._id = decoded.id;

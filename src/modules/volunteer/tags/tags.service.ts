@@ -1,7 +1,9 @@
 import {CreateVolunteerTag, Tag, VolunteerTag} from "./tags.model";
 import AppError from "../../../errors/AppError";
-import mongoose, {ClientSession} from "mongoose";
+import {ClientSession} from "mongoose";
 import {existsVolunteerById} from "../volunteer.service";
+
+const mongoose = require("mongoose");
 
 export const addTag = async (name: string) => {
     let tag = await findTagByName(name);

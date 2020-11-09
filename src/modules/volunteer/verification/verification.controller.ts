@@ -1,5 +1,4 @@
 import {NextFunction, Request, Response} from "express";
-import jwt from "jsonwebtoken";
 import {
     createVolunteerForRegisterStepOne,
     updateMailVerificationStatus,
@@ -9,6 +8,7 @@ import {
 import {sendEmailToken, sendSecureCodeToPhone, verifyVolunteerPhone,} from "./verification.service";
 import AppError from "../../../errors/AppError";
 import {STATUS_EMAIL_VERIFIED, STATUS_FINISHED, STATUS_PHONE_VERIFIED, Volunteer} from "../volunteer.model";
+import {createToken, getDecoded} from "../../../utils/tokenUtils";
 
 export const registerStepOne = async function (
     req: Request,
@@ -24,13 +24,7 @@ export const registerStepOne = async function (
     });
 
     if (volunteer.status != STATUS_FINISHED) {
-        const token = jwt.sign(
-            {id: volunteer._id},
-            `${process.env.JWT_SECRET_KEY}`,
-            {
-                expiresIn: "1d",
-            }
-        );
+        const token = createToken(volunteer._id);
         await sendEmailToken(volunteer.email, volunteer.name, token);
     }
 
@@ -40,10 +34,8 @@ export const registerStepOne = async function (
 };
 
 export const verifyEmailToken = async function (req: Request, res: Response): Promise<void> {
-    const decoded: any = jwt.verify(
-        req.params.token,
-        `${process.env.JWT_SECRET_KEY}`
-    );
+    const token = req.params.token;
+    const decoded = getDecoded(token);
 
     const volunteer = await Volunteer.findById(decoded.id);
     if (!volunteer)
@@ -52,9 +44,7 @@ export const verifyEmailToken = async function (req: Request, res: Response): Pr
     let status = volunteer.status;
 
     if (volunteer.status != STATUS_FINISHED) {
-        console.log(decoded.id);
-        let tmp = await updateMailVerificationStatus(decoded.id);
-        console.log(tmp?.status);
+        await updateMailVerificationStatus(decoded.id);
         status = STATUS_EMAIL_VERIFIED;
     }
 
@@ -71,15 +61,9 @@ export const registerStepTwo = async function (
     const {phone} = req.body;
     const token = req.params.token;
 
-    console.log(token);
-    console.log(phone);
-
     await validateVolunteerRegisterDataStepTwo({phone: phone});
 
-    const decoded: any = jwt.verify(
-        token,
-        `${process.env.JWT_SECRET_KEY}`
-    );
+    const decoded = getDecoded(token);
 
     const volunteer = await Volunteer.findById(decoded.id);
     if (!volunteer)
@@ -107,10 +91,7 @@ export const verifyPhoneCode = async function (
     const {token} = req.params;
     await validateVolunteerRegisterDataStepTwo({phone: phone});
 
-    const decoded: any = jwt.verify(
-        token,
-        `${process.env.JWT_SECRET_KEY}`
-    );
+    const decoded = getDecoded(token);
 
     const volunteer = await Volunteer.findById(decoded.id);
     if (!volunteer)

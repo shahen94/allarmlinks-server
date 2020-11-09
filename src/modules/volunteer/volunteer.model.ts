@@ -26,6 +26,7 @@ export interface IVolunteer extends Document {
         from: Number,
         to: Number,
     },
+    workStatus?: string,
     facebookProfile?: string,
     linkedinProfile?: string,
     twitterProfile?: string,
@@ -51,6 +52,7 @@ const VolunteerSchema: Schema = new mongoose.Schema({
         from: {type: Number, default: null},
         to: {type: Number, default: null},
     },
+    workStatus: {type: String, default: null},
     facebookProfile: {type: String, default: null},
     linkedinProfile: {type: String, default: null},
     twitterProfile: {type: String, default: null},
@@ -63,4 +65,4 @@ export const Volunteer = mongoose.model<IVolunteer>("Volunteer", VolunteerSchema
 export interface IFilterQuery {
     field: string,
     exp: string
-};
+}

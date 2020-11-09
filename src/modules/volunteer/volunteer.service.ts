@@ -1,14 +1,8 @@
-import {
-    IFilterQuery,
-    IVolunteer,
-    STATUS_EMAIL_VERIFIED,
-    STATUS_FINISHED,
-    STATUS_PHONE_VERIFIED,
-    Volunteer
-} from "./volunteer.model";
+import {IVolunteer, STATUS_EMAIL_VERIFIED, STATUS_FINISHED, STATUS_PHONE_VERIFIED, Volunteer,} from "./volunteer.model";
 import {VolunteerRegisterStepOneData, VolunteerRegisterStepTwoData,} from "./verification/verification.interfaces";
 import AppError from "../../errors/AppError";
 import {ClientSession} from "mongoose";
+import NotFoundError from "../../errors/NotFoundError";
 
 const faker = require("faker");
 
@@ -29,7 +23,7 @@ export const volunteerStepOneDataValidation = Joi.object({
 });
 
 export const volunteerPhoneValidation = Joi.object({
-    phone: Joi.string().phoneNumber()
+    phone: Joi.string().phoneNumber(),
 });
 
 export const createVolunteerForRegisterStepOne = async function (
@@ -81,57 +75,72 @@ export const updatePhoneVerificationStatus = function (
     );
 };
 
-export const existsVolunteerById = async (volunteerId: string): Promise<boolean> => {
+export const existsVolunteerById = async (
+    volunteerId: string
+): Promise<boolean> => {
     const volunteer = await Volunteer.findById(volunteerId);
     return !!volunteer;
-}
+};
 
 export const validateAdditionalData = async (data: IVolunteer) => {
     const volunteer = await Volunteer.findById(data._id);
-    console.log(data._id);
-    console.log(volunteer);
-    if (!volunteer)
-        throw new AppError(400, "Volunteer doesn't exist");
+    if (!volunteer) throw new AppError(400, "Volunteer doesn't exist");
 
     if (volunteer.status != STATUS_PHONE_VERIFIED)
         throw new AppError(400, "Invalid status.");
 
-    if (!data.country || !data.city)
-        throw new AppError(400, "Country and City fields are required");
+    if (!data.country || !data.city || !data.birthDate)
+        throw new AppError(400, "Birth date, country and city fields are required");
 };
 
-export const updateWithAdditionalData = async (data: IVolunteer, session: ClientSession) => {
+export const updateWithAdditionalData = async (
+    data: IVolunteer,
+    session: ClientSession
+) => {
     await validateAdditionalData(data);
 
-    return Volunteer.findByIdAndUpdate(data._id, {
-        birthDate: data.birthDate,
-        country: data.country,
-        city: data.city,
-        address: data.address,
-        specialization: data.specialization,
-        currentEmployerName: data.currentEmployerName,
-        occupation: data.occupation,
-        languages: data.languages,
-        hoursPerWeek: data.hoursPerWeek,
-        facebookProfile: data.facebookProfile,
-        linkedinProfile: data.linkedinProfile,
-        twitterProfile: data.twitterProfile,
-        whereToVolunteer: data.whereToVolunteer,
-        other: data.other,
-        status: STATUS_FINISHED
-    }, {
-        new: true,
-        runValidators: true,
-        session: session
-    });
+    return Volunteer.findByIdAndUpdate(
+        data._id,
+        {
+            birthDate: data.birthDate,
+            country: data.country,
+            city: data.city,
+            address: data.address,
+            specialization: data.specialization,
+            currentEmployerName: data.currentEmployerName,
+            occupation: data.occupation,
+            languages: data.languages,
+            hoursPerWeek: data.hoursPerWeek,
+            facebookProfile: data.facebookProfile,
+            linkedinProfile: data.linkedinProfile,
+            twitterProfile: data.twitterProfile,
+            whereToVolunteer: data.whereToVolunteer,
+            other: data.other,
+            status: STATUS_FINISHED,
+        },
+        {
+            new: true,
+            runValidators: true,
+            session: session,
+        }
+    );
 };
 
-export const getVolunteers = async (volunteerId: any, limit: number, filter: IFilterQuery[]) => {
+export const getVolunteers = async (volunteerId: any, limit: number) => {
     if (volunteerId)
-        return Volunteer.find({'_id': {'$gt': volunteerId}}).sort({'_id': 1}).limit(limit);
-    else
-        return Volunteer.find({}).sort({'_id': 1}).limit(limit);
-}
+        return Volunteer.find({_id: {$gt: volunteerId}})
+            .sort({_id: 1})
+            .limit(limit);
+    else return Volunteer.find({}).sort({_id: 1}).limit(limit);
+};
+
+export const getVolunteer = async (volunteerId: string) => {
+    const data = await Volunteer.findById(volunteerId);
+    if (!data) {
+        throw new NotFoundError("Volunteer not found");
+    }
+    return data;
+};
 
 export const createDummyVolunteer = async () => {
     const [name, surname] = faker.name.findName().split(" ");
@@ -139,22 +148,21 @@ export const createDummyVolunteer = async () => {
     const phone = faker.phone.phoneNumber();
 
     const volunteer = {
-        "name": name,
-        "surname": surname,
-        "email": email,
-        "phone": phone,
-        "city": "Yerevan",
-        "country": "Armenia",
-        "status": STATUS_FINISHED
+        name: name,
+        surname: surname,
+        email: email,
+        phone: phone,
+        city: "Yerevan",
+        country: "Armenia",
+        status: STATUS_FINISHED,
     };
 
     return Volunteer.create(volunteer);
-}
+};
 
 export const createDummyData = async (limit: number) => {
-    for (let i = 0; i < limit; i++)
-        await createDummyVolunteer();
-}
+    for (let i = 0; i < limit; i++) await createDummyVolunteer();
+};
 
 // interface  IConditions {
 //     [key: stirng] : string
