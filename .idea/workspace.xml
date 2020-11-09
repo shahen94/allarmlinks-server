@@ -20,30 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d4d4cc7-1118-428c-b580-79be10c60aa9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/admin/admin.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/admin/admin.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/admin/admin.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/errors/EmailAlreadyUsedError.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/errors/EmailAlreadyVerified.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/example.env" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/example.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/errors/AppError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/AppError.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/errors/BadRequestError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/BadRequestError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/errors/NotFoundError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors/NotFoundError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/admin/auth.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/auth.middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/admin/validationSchemas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/validationSchemas.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/errorHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/errorHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.interfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.service.ts" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,18 +101,17 @@
       <workItem from="1604487644563" duration="12434000" />
       <workItem from="1604509286459" duration="5773000" />
       <workItem from="1604556328060" duration="2593000" />
-
       <workItem from="1604562305501" duration="8466000" />
       <workItem from="1604608426060" duration="4000" />
       <workItem from="1604648890583" duration="18000" />
       <workItem from="1604648911018" duration="99000" />
       <workItem from="1604677348835" duration="44000" />
-
       <workItem from="1604561233355" duration="168000" />
       <workItem from="1604563908618" duration="7419000" />
       <workItem from="1604577678563" duration="772000" />
       <workItem from="1604578698578" duration="8272000" />
       <workItem from="1604635774733" duration="9489000" />
+      <workItem from="1604898569391" duration="350000" />
     </task>
     <task id="LOCAL-00001" summary="Added Phone and Mail verification">
       <created>1604561278673</created>
@@ -159,7 +147,6 @@
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
       <updated>1604652590158</updated>
-
     </task>
     <task id="LOCAL-00006" summary="Added cors">
       <created>1604653654024</created>
@@ -201,7 +188,6 @@
     </state>
     <state x="525" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1604404957390" />
     <state x="656" y="296" width="525" height="404" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1604405222518" />
-
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1604677390747">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -214,7 +200,6 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="707" y="401" width="502" height="320" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.27.1920.1053@0.27.1920.1053" timestamp="1604586276110" />
-
     <state x="677" y="474" width="565" height="174" key="GitCloneDialog" timestamp="1604511443594">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -243,13 +228,11 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="576" y="339" width="986" height="741" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1604500140689" />
-
     <state x="446" y="229" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604563884857">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="446" y="229" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1604563884857" />
     <state x="558" y="320" width="800" height="539" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1604417869801" />
-
     <state x="558" y="292" width="800" height="539" key="Vcs.Push.Dialog.v2" timestamp="1604653659873">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -258,6 +241,5 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="667" y="149" width="586" height="804" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1604669793930" />
-
   </component>
 </project>

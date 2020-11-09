@@ -1,49 +1,45 @@
-import { Request, Response, NextFunction } from "express";
+import {NextFunction, Response} from "express";
 import jwt from "jsonwebtoken";
-import adminService from "./admin.service";
-import { IAdmin } from "./admin.model";
+import {Admin} from "./admin.model";
+import {authRequest} from "./admin.interfaces";
+import UnauthorizedRequestError from "../../errors/UnauthorizedRequestError";
+import AppError from "../../errors/AppError";
 
-interface authRequest extends Request {
-  adminData: IAdmin;
-}
+const authorize = (req: authRequest, _: Response, next: NextFunction): void => {
+    let token = req.headers["x-access-token"];
 
-const authorize = (req: authRequest, res: Response, next: NextFunction) => {
-  let token = req.headers["x-access-token"];
-
-  if (!token) {
-    return res.status(401).send({
-      message: "No token provided!",
-    });
-  }
-
-  jwt.verify(
-    `${token}`,
-    `${process.env.JWT_SECRET_KEY}`,
-    async (err, decoded: any) => {
-      const adminData = await adminService.getAdminData(decoded.id);
-      if (err || !adminData) {
-        return res.status(401).send({
-          message: "Unauthorized!",
-        });
-      }
-      req.adminData = adminData;
-      next();
+    if (!token) {
+        throw new UnauthorizedRequestError("No token provided!");
     }
-  );
+
+    jwt.verify(
+        `${token}`,
+        `${process.env.JWT_SECRET_KEY}`,
+        (err, decoded: any) => {
+            if (err) {
+                throw new UnauthorizedRequestError("Unauthorized!");
+            }
+            Admin.findOne({_id: decoded.id}).then((data) => {
+                if (data) req.adminData = data;
+                next();
+            });
+        }
+    );
 };
 
-const authenticate = (req: authRequest, res: Response, next: NextFunction) => {
-  if (req.adminData.type === "super") {
-    next();
-    return;
-  }
-  res.status(403).send({
-    message: "Not super admin",
-  });
-  return;
+const authenticate = (
+    req: authRequest,
+    _: Response,
+    next: NextFunction
+): void => {
+    if (req.adminData.type === "super") {
+        next();
+        return;
+    }
+    throw new AppError(403, "Not super admin!");
 };
 
 export const authJwt = {
-  authenticate,
-  authorize,
+    authenticate,
+    authorize,
 };

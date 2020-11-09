@@ -1,55 +1,76 @@
-import { Request, Response } from "express";
-import {
-  adminLoginValidationSchema,
-  addAdminSchema,
-} from "./validationSchemas";
+import {Request, Response} from "express";
+import {addAdminSchema, loginValidationSchema} from "./validationSchemas";
 import adminService from "./admin.service";
 
-export const login = async (req: Request, res: Response) => {
-  await adminLoginValidationSchema.validateAsync(req.body);
-  const { email, password } = req.body;
-  const adminDataWithJwt = await adminService.getAdminDataWithJwt(
-    email,
-    password
-  );
-  return res.status(200).json(adminDataWithJwt);
+export const login = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    const {email, password} = req.body;
+    await loginValidationSchema.validateAsync({email, password});
+    const adminDataWithJwt = await adminService.getDataWithJwt(email, password);
+    return res.status(200).json(adminDataWithJwt);
 };
 
-export const profile = async (req: Request, res: Response) => {
-  const data = await adminService.getProfileData();
-  return res.status(200).json(data);
+export const profile = async (
+    _: Request,
+    res: Response
+): Promise<Response> => {
+    const profileData = await adminService.getProfileData();
+    return res.status(200).json(profileData);
 };
 
-export const addGeneralAdmin = async (req: Request, res: Response) => {
-  await addAdminSchema.validateAsync(req.body);
-  const { name, surname, email, password } = req.body;
-  await adminService.checkIfExists(email);
-  const newAdmin = await adminService.createAdminData(
-    name,
-    surname,
-    email,
-    password,
-    "general"
-  );
-  res.status(200).json({ data: newAdmin });
+export const addGeneralAdmin = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    const {name, surname, email, password} = req.body;
+    await addAdminSchema.validateAsync({name, surname, email, password});
+    await adminService.errorIfDataExists({email});
+    const addedGeneralAdmin = await adminService.createAdminData(
+        name,
+        surname,
+        email,
+        password
+    );
+    return res.status(200).json(addedGeneralAdmin);
 };
 
-export const gettingAdmins = async (req: Request, res: Response) => {
-  const admins = await adminService.getAllAdminsData();
-  res.status(200).json({ data: admins });
+export const getGeneralAdmins = async (
+    _: Request,
+    res: Response
+): Promise<Response> => {
+    const adminsData = await adminService.getGeneralAdmins();
+    return res.status(200).json(adminsData);
 };
 
-export const editingAdmin = async (req: Request, res: Response) => {
-  const editedAdmin = await adminService.editAdminData(req.params.id, req.body);
-  res.status(200).json({ data: editedAdmin });
+export const editGeneralAdmin = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    const editedGeneralAdmin = await adminService.editGeneralAdmin(
+        req.params.id,
+        req.body
+    );
+    return res.status(200).json(editedGeneralAdmin);
 };
 
-export const deletingAdmin = async (req: Request, res: Response) => {
-  await adminService.deleteAdmin(req.params.id);
-  res.status(200).json({ message: "deleted" });
+export const deleteGeneralAdmin = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    const deletedGeneralAdmin = await adminService.deleteGeneralAdmin(
+        req.params.id
+    );
+    return res.status(200).json(deletedGeneralAdmin);
 };
 
-export const gettingDataAdmin = async (req: Request, res: Response) => {
-  const data = await adminService.getAdminData(req.params.id);
-  res.status(200).json({ data });
+export const getGeneralAdminData = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    const generalAdminData = await adminService.getGeneralAdminData(
+        req.params.id
+    );
+    return res.status(200).json(generalAdminData);
 };
