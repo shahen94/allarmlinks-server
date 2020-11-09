@@ -1,105 +1,82 @@
-import { Admin } from "./admin.model";
-import { IAdmin } from "./admin.interfaces";
+import {Admin} from "./admin.model";
+import {IAdmin} from "./admin.interfaces";
+import {createToken} from "../../utils/tokenUtils"
 import bcrypt from "bcrypt";
 import NotFoundError from "../../errors/NotFoundError";
 import BadRequestError from "../../errors/BadRequestError";
 
 class AdminService {
-  createAdminData = async (
-    name: string,
-    surname: string,
-    email: string,
-    password: string,
-    type: string = "general"
-  ): Promise<{ message: string }> => {
-    const hashedPass = bcrypt.hashSync(password, 10);
-    await Admin.create({ name, surname, email, password: hashedPass, type });
-    return { message: "Added!" };
-  };
-
-  getDataWithJwt = async (
-    loggedEmail: string,
-    loggedPassword: string
-  ): Promise<{
-    data: {
-      name: string;
-      surname: string;
-      email: string;
-      type: string;
+    createAdminData = async (
+        name: string,
+        surname: string,
+        email: string,
+        password: string,
+        type: string = "general"
+    ): Promise<void> => {
+        const hashedPass = bcrypt.hashSync(password, 10);
+        await Admin.create({name, surname, email, password: hashedPass, type});
     };
-    accessToken: string;
-  }> => {
-    const adminData = await this.errorIfDataNotFound(
-      { email: loggedEmail },
-      false
-    );
-    adminData.isCorrectPassword(loggedPassword);
-    const accessToken = adminData.generateJwt();
-    const { name, surname, email, type } = adminData;
-    return { data: { name, surname, email, type }, accessToken };
-  };
 
-  errorIfDataExists = async (condition: object): Promise<void> => {
-    const data = await Admin.findOne(condition);
-    if (data)
-      throw new BadRequestError(`${Object.keys(condition)[0]} already exists`);
-  };
+    getDataWithJwt = async (
+        loggedEmail: string,
+        loggedPassword: string
+    ): Promise<{
+        adminData: IAdmin;
+        accessToken: string;
+    }> => {
+        const adminData = await this.errorIfDataNotFound(
+            {email: loggedEmail},
+            false
+        );
+        adminData.isCorrectPassword(loggedPassword);
+        const accessToken = createToken(adminData._id);
+        return {adminData, accessToken};
+    };
 
-  errorIfDataNotFound = async (
-    condition: object,
-    get: boolean
-  ): Promise<IAdmin> => {
-    const data = await Admin.findOne(condition);
-    if (!data) {
-      if (get)
-        throw new NotFoundError(`${Object.keys(condition)[0]} not found`);
-      else throw new BadRequestError(`${Object.keys(condition)[0]} not found`);
-    }
-    return data;
-  };
+    errorIfDataExists = async (condition: object): Promise<void> => {
+        const data = await Admin.findOne(condition);
+        if (data)
+            throw new BadRequestError(`${Object.keys(condition)[0]} already exists`);
+    };
 
-  getProfileData = () => {
-    // getting volunteers data and sending the type
-    return { data: {} };
-  };
+    errorIfDataNotFound = async (
+        condition: object,
+        get: boolean
+    ): Promise<IAdmin> => {
+        const data = await Admin.findOne(condition);
+        if (!data) {
+            if (get)
+                throw new NotFoundError(`${Object.keys(condition)[0]} not found`);
+            else throw new BadRequestError(`${Object.keys(condition)[0]} not found`);
+        }
+        return data;
+    };
 
-  getGeneralAdmins = async (): Promise<{ data: IAdmin[] }> => {
-    const data = await Admin.find({ type: "general" });
-    return { data };
-  };
+    getGeneralAdmins = async (): Promise<IAdmin[]> => {
+        return Admin.find({type: "general"});
+    };
 
-  editGeneralAdmin = async (
-    adminId: string,
-    editedData: object
-  ): Promise<{
-    data: IAdmin;
-  }> => {
-    const data = await Admin.findByIdAndUpdate(adminId, editedData, {
-      new: true,
-      runValidators: true,
-    });
-    if (!data) throw new NotFoundError("Admin not found");
-    return { data };
-  };
+    editGeneralAdmin = async (
+        adminId: string,
+        editedData: object
+    ): Promise<IAdmin> => {
+        const data = await Admin.findByIdAndUpdate(adminId, editedData, {
+            new: true,
+            runValidators: true,
+        });
+        if (!data) throw new NotFoundError("Admin not found");
+        return data;
+    };
 
-  deleteGeneralAdmin = async (
-    adminId: string
-  ): Promise<{
-    message: string;
-  }> => {
-    const adminToBeDeleted = await Admin.findByIdAndDelete(adminId);
-    if (!adminToBeDeleted) throw new NotFoundError("Admin not found");
-    return { message: "Deleted!" };
-  };
+    deleteGeneralAdmin = async (adminId: string): Promise<void> => {
+        const adminToBeDeleted = await Admin.findByIdAndDelete(adminId);
+        if (!adminToBeDeleted) throw new NotFoundError("Admin not found");
+    };
 
-  getGeneralAdminData = async (
-    adminId: string
-  ): Promise<{
-    data: IAdmin;
-  }> => {
-    const data = await this.errorIfDataNotFound({ _id: adminId }, true);
-    return { data };
-  };
+    getGeneralAdminData = async (adminId: string): Promise<IAdmin> => {
+        return await this.errorIfDataNotFound({_id: adminId}, true);
+
+    };
 }
 
 const adminService = new AdminService();

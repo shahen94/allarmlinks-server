@@ -2,7 +2,6 @@ import * as mongoose from "mongoose";
 import {Schema} from "mongoose";
 import BadRequestError from "../../errors/BadRequestError";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import {IAdmin} from "./admin.interfaces";
 
 const AdminSchema: Schema = new mongoose.Schema({
@@ -32,12 +31,6 @@ AdminSchema.methods.isCorrectPassword = function (password: string): void {
     if (!bcrypt.compareSync(password, this.password)) {
         throw new BadRequestError("Wrong password");
     }
-};
-
-AdminSchema.methods.generateJwt = function (): string {
-    return jwt.sign({id: this._id}, `${process.env.JWT_SECRET_KEY}`, {
-        expiresIn: 86400,
-    });
 };
 
 export const Admin = mongoose.model<IAdmin>("Admin", AdminSchema);

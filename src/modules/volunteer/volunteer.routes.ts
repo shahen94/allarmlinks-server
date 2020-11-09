@@ -2,12 +2,11 @@ import {Application} from "express";
 import verificationRouter from "./verification/verification.routes";
 import registrationRouter from "./registration/registration.routes";
 import tagsRouter from "./tags/tags.routes";
-import {getVolunteerList} from "./volunteer.controller";
 
 const {Router} = require("express");
 const router = Router();
 
-router.route("/").get(getVolunteerList);
+// router.route("/").get(getVolunteerList);
 
 router.setupRoutes = (app: Application, prefix: string): void => {
     const routeUrl = prefix + "/volunteer";
