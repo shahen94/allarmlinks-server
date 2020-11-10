@@ -1,7 +1,7 @@
-import {IVolunteer, STATUS_EMAIL_VERIFIED, STATUS_FINISHED, STATUS_PHONE_VERIFIED, Volunteer,} from "./volunteer.model";
-import {VolunteerRegisterStepOneData, VolunteerRegisterStepTwoData,} from "./verification/verification.interfaces";
+import { IVolunteer, STATUS_EMAIL_VERIFIED, STATUS_FINISHED, STATUS_PHONE_VERIFIED, Volunteer, } from "./volunteer.model";
+import { VolunteerRegisterStepOneData, VolunteerRegisterStepTwoData, } from "./verification/verification.interfaces";
 import AppError from "../../errors/AppError";
-import {ClientSession} from "mongoose";
+import { ClientSession } from "mongoose";
 import NotFoundError from "../../errors/NotFoundError";
 
 const faker = require("faker");
@@ -13,7 +13,7 @@ export const validateVolunteerRegisterDataStepOne = async function (
 ) {
     await volunteerStepOneDataValidation.validateAsync(data);
 
-    return Volunteer.findOne({email: data.email});
+    return Volunteer.findOne({ email: data.email });
 };
 
 export const volunteerStepOneDataValidation = Joi.object({
@@ -50,7 +50,7 @@ export const validateVolunteerRegisterDataStepTwo = async function (
 export const updateMailVerificationStatus = function (id: string) {
     return Volunteer.findByIdAndUpdate(
         id,
-        {status: STATUS_EMAIL_VERIFIED},
+        { status: STATUS_EMAIL_VERIFIED },
         {
             new: true,
             runValidators: true,
@@ -128,10 +128,10 @@ export const updateWithAdditionalData = async (
 
 export const getVolunteers = async (volunteerId: any, limit: number) => {
     if (volunteerId)
-        return Volunteer.find({_id: {$gt: volunteerId}})
-            .sort({_id: 1})
+        return Volunteer.find({ _id: { $gt: volunteerId } })
+            .sort({ _id: 1 })
             .limit(limit);
-    else return Volunteer.find({}).sort({_id: 1}).limit(limit);
+    else return Volunteer.find({}).sort({ _id: 1 }).limit(limit);
 };
 
 export const getVolunteer = async (volunteerId: string) => {
