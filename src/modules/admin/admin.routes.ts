@@ -21,7 +21,6 @@ const routeUrl = "/admin";
 router.route("/login").post(login);
 router.route("/volunteers").get(authJwt.authorize, getVolunteersList);
 router.route("/volunteers/:id").get(authJwt.authorize, getVolunteerData);
-/* ANCHOR mine */
 router.route("/volunteers/workstatus/:id").put(authJwt.authorize, updateWorkStatus);
 
 

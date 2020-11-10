@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { addAdminSchema, loginValidationSchema } from "./validationSchemas";
+import { addAdminSchema, loginValidationSchema, workStatusSchema } from "./validationSchemas";
 import adminService from "./admin.service";
 import { getVolunteer, getVolunteers, updateWithAdditionalData } from "../volunteer/volunteer.service";
 import { IVolunteer, Volunteer } from "../volunteer/volunteer.model";
 import { getDecoded } from "../../utils/tokenUtils";
+import AppError from "../../errors/AppError";
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
     const { email, password } = req.body;
@@ -32,11 +33,12 @@ export const getVolunteerData = async (req: Request, res: Response) => {
     return res.status(200).json({ data: volunteerData });
 };
 
-/* ANCHOR change status */
 export const updateWorkStatus = async (req: Request, res: Response) => {
     const { id } = req.params;
+    const { workStatus } = req.body;
 
-    const result = await Volunteer.findByIdAndUpdate(id, { workStatus: req.body.workStatus }, {
+    await workStatusSchema.validateAsync({ workStatus })
+    await Volunteer.findByIdAndUpdate(id, { workStatus: req.body.workStatus }, {
         new: true,
     })
     res.status(200).end()
