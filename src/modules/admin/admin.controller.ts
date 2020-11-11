@@ -5,7 +5,7 @@ import { getVolunteer, getVolunteers, updateWithAdditionalData } from "../volunt
 import { IVolunteer, Volunteer } from "../volunteer/volunteer.model";
 import { getDecoded } from "../../utils/tokenUtils";
 import AppError from "../../errors/AppError";
-import { IVolunteerFilter } from "./admin.interfaces";
+import { IAdminFilter, IVolunteerFilter } from "./admin.interfaces";
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
     const { email, password } = req.body;
@@ -79,10 +79,14 @@ export const addGeneralAdmin = async (
 };
 
 export const getGeneralAdmins = async (
-    _: Request,
+    req: Request,
     res: Response
 ): Promise<Response> => {
-    const adminsData = await adminService.getGeneralAdmins();
+    const filter: IAdminFilter = {
+        type: req.query.type as unknown ,
+        value: req.query.value as unknown
+   } as IAdminFilter
+    const adminsData = await adminService.getGeneralAdmins(filter);
     return res.status(200).json({ data: adminsData });
 };
 

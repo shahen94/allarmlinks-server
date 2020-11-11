@@ -26,7 +26,17 @@ export enum FilterType {
     Language = "language",
     Skills = "skills"
 }
-export interface IVolunteerFilter{
+export interface IVolunteerFilter {
     type: FilterType,
+    value: string
+}
+
+export enum AdminFilterType {
+    Name = "name",
+    Surname = "surname",
+    Email = "email"
+}
+export interface IAdminFilter {
+    type: AdminFilterType,
     value: string
 }

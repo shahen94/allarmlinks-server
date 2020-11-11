@@ -1,9 +1,10 @@
 import { Admin } from "./admin.model";
-import { IAdmin } from "./admin.interfaces";
+import { AdminFilterType, IAdmin, IAdminFilter } from "./admin.interfaces";
 import { createToken } from "../../utils/tokenUtils"
 import bcrypt from "bcrypt";
 import NotFoundError from "../../errors/NotFoundError";
 import BadRequestError from "../../errors/BadRequestError";
+import { caseInsExp } from "../../utils/regexp";
 
 class AdminService {
     createAdminData = async (
@@ -52,8 +53,24 @@ class AdminService {
         return data;
     };
 
-    getGeneralAdmins = async (): Promise<IAdmin[]> => {
-        return Admin.find({ type: "general" });
+    getGeneralAdmins = async (filter:IAdminFilter): Promise<IAdmin[]> => {
+        const  value = caseInsExp(filter.value)
+        const condition:any = {
+            type:'general',
+        }   
+        switch (filter.type) {
+            case AdminFilterType.Name:
+                condition[AdminFilterType.Name] = value
+                break;
+            case AdminFilterType.Surname:
+                condition[AdminFilterType.Surname] = value
+                break;
+            case AdminFilterType.Email:
+                condition[AdminFilterType.Email] = value
+                break;
+            }
+
+            return Admin.find(condition);
     };
 
     editGeneralAdmin = async (
