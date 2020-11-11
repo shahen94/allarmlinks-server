@@ -51,13 +51,13 @@ export const addGeneralAdmin = async (
     const { name, surname, email, password } = req.body;
     await addAdminSchema.validateAsync({ name, surname, email, password });
     await adminService.errorIfDataExists({ email });
-    await adminService.createAdminData(
+    const newAdmin = await adminService.createAdminData(
         name,
         surname,
         email,
         password
     );
-    return res.status(200).json({ message: "Added!" });
+    return res.status(200).json({ data: newAdmin });
 };
 
 export const getGeneralAdmins = async (

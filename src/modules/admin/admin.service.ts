@@ -12,9 +12,9 @@ class AdminService {
         email: string,
         password: string,
         type: string = "general"
-    ): Promise<void> => {
+    ): Promise<IAdmin> => {
         // const hashedPass = bcrypt.hashSync(password, 10);
-        await Admin.create({ name, surname, email, password, type });
+        return await Admin.create({ name, surname, email, password, type });
     };
 
     getDataWithJwt = async (
