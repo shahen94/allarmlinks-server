@@ -1,5 +1,5 @@
-import {Request} from "express";
-import {Document} from "mongoose";
+import { Request } from "express";
+import { Document } from "mongoose";
 
 export interface IAdmin extends Document {
     name: string;
@@ -15,4 +15,18 @@ export interface IAdmin extends Document {
 
 export interface authRequest extends Request {
     adminData: IAdmin;
+}
+
+
+export enum FilterType {
+    FullName = "fullName",
+    CompanyOccupation = "companyOccupation",
+    CountryCity = "countryCity",
+    Email = "email",
+    Language = "language",
+    Skills = "skills"
+}
+export interface IVolunteerFilter{
+    type: FilterType,
+    value: string
 }

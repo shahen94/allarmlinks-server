@@ -5,6 +5,7 @@ import { getVolunteer, getVolunteers, updateWithAdditionalData } from "../volunt
 import { IVolunteer, Volunteer } from "../volunteer/volunteer.model";
 import { getDecoded } from "../../utils/tokenUtils";
 import AppError from "../../errors/AppError";
+import { IVolunteerFilter } from "./admin.interfaces";
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
     const { email, password } = req.body;
@@ -21,9 +22,16 @@ export const getVolunteersList = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
+    const volunteerId: string = req.query.volunteerId as unknown as string
+    const filter: IVolunteerFilter = {
+         type: req.query.type as unknown ,
+         value:req.query.value as unknown
+    } as IVolunteerFilter
+    const limit: number = parseInt(req.query.limit as string)
     const volunteerList = await getVolunteers(
-        req.query.volunteerId,
-        parseInt(req?.query?.limit as string, 10)
+        volunteerId,
+        limit,
+        filter
     );
     return res.status(200).json({ data: volunteerList });
 };

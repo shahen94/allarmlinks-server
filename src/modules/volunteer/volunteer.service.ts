@@ -3,7 +3,8 @@ import { VolunteerRegisterStepOneData, VolunteerRegisterStepTwoData, } from "./v
 import AppError from "../../errors/AppError";
 import { ClientSession } from "mongoose";
 import NotFoundError from "../../errors/NotFoundError";
-
+import { FilterType, IVolunteerFilter } from "../admin/admin.interfaces";
+import { getVolunteersForTags } from './tags/tags.service';
 const faker = require("faker");
 
 const Joi = require("joi").extend(require("joi-phone-number"));
@@ -126,12 +127,37 @@ export const updateWithAdditionalData = async (
     );
 };
 
-export const getVolunteers = async (volunteerId: any, limit: number) => {
-    if (volunteerId)
-        return Volunteer.find({ _id: { $gt: volunteerId } })
+export const getVolunteers = async (volunteerId: any, limit: number, filter: IVolunteerFilter) => {
+    const { value } = filter
+    let query;
+    if(filter.type){
+        switch (filter.type) {
+            case FilterType.FullName:
+                query = Volunteer.find().byFullName(value)
+                break;
+            case FilterType.CompanyOccupation:
+                query = Volunteer.find().byCompanyOccupation(value)
+                break;
+            case FilterType.CountryCity:
+                query = Volunteer.find().byCountryCity(value)
+                break;
+            case FilterType.Email:
+                query = Volunteer.find().byEmail(value)
+                break;
+            case FilterType.Language:
+                query = Volunteer.find().byLanguage(value)
+                break;
+            case FilterType.Skills:
+                return getVolunteersForTags(value.split(' '))
+        }
+        return query.sort({ _id: 1 }).limit(limit);
+    }else{
+        if (volunteerId)
+            return Volunteer.find({ _id: { $gt: volunteerId } })
             .sort({ _id: 1 })
             .limit(limit);
-    else return Volunteer.find({}).sort({ _id: 1 }).limit(limit);
+        else return Volunteer.find().sort({ _id: 1 }).limit(limit);
+    }
 };
 
 export const getVolunteer = async (volunteerId: string) => {
