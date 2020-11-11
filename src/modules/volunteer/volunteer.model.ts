@@ -32,6 +32,7 @@ export interface IVolunteer extends Document {
     twitterProfile?: string,
     whereToVolunteer?: string,
     other?: string,
+    skills?:string[],
     notes?: string,
 }
 

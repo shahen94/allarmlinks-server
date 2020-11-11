@@ -4,7 +4,9 @@ import AppError from "../../errors/AppError";
 import { ClientSession } from "mongoose";
 import NotFoundError from "../../errors/NotFoundError";
 import { FilterType, IVolunteerFilter } from "../admin/admin.interfaces";
-import { getVolunteersForTags } from './tags/tags.service';
+import { getTagsForVolunteer, getVolunteersForTags } from './tags/tags.service';
+import { Tag } from "./tags/tags.model";
+import { getAllAvailableTagsForVolunteer } from './tags/tags.controller';
 const faker = require("faker");
 
 const Joi = require("joi").extend(require("joi-phone-number"));
@@ -165,7 +167,9 @@ export const getVolunteer = async (volunteerId: string) => {
     if (!data) {
         throw new NotFoundError("Volunteer not found");
     }
-    return data;
+    const skillData = await getTagsForVolunteer(volunteerId)
+    const skills = skillData.map(obj=>obj.name)
+    return {...data.toObject(),skills};
 };
 
 export const createDummyVolunteer = async () => {
