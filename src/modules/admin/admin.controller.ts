@@ -44,9 +44,8 @@ export const getVolunteerData = async (req: Request, res: Response) => {
 export const updateWorkStatus = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { workStatus } = req.body;
-
     await workStatusSchema.validateAsync({ workStatus })
-    /* ANCHOR CHECK IT */
+
     await Volunteer.findByIdAndUpdate(id, { workStatus: workStatus }, {
         new: true,
     })
