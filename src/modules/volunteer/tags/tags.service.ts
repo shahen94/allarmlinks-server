@@ -140,14 +140,16 @@ export const getVolunteersForTagsPipeline = (tags: string[]) => {
         { 
             "$unwind" : { 
                 "path" : "$volunteers", 
-                "preserveNullAndEmptyArrays" : true
+                "preserveNullAndEmptyArrays" : false
             }
         }, 
         { 
             "$match" : {
                 "$and":[
                     { 
-                        "tags.name" : "Programming"
+                        "tags.name" : {
+                            "$in":tags
+                        }
                     }   ,
                     {
                         "volunteers.status" : STATUS_FINISHED
@@ -157,27 +159,27 @@ export const getVolunteersForTagsPipeline = (tags: string[]) => {
         }, 
         { 
             "$project" : { 
-                "volunteers.name" : "$volunteers.name", 
-                "volunteers.surname" : "$volunteers.surname", 
-                "volunteers.email" : "$volunteers.email", 
-                "volunteers.phone" : "$volunteers.phone", 
-                "volunteers.birthDate" : "$volunteers.birthDate", 
-                "volunteers.country" : "$volunteers.country", 
-                "volunteers.city" : "$volunteers.city", 
-                "volunteers.address" : "$volunteers.address", 
-                "volunteers.specialization" : "$volunteers.specialization", 
-                "volunteers.currentEmployerName" : "$volunteers.currentEmployerName", 
-                "volunteers.occupation" : "$volunteers.occupation", 
-                "volunteers.languages" : "$volunteers.languages", 
-                "volunteers.hoursPerWeek" : "$volunteers.hoursPerWeek", 
-                "volunteers.workStatus" : "$volunteers.workStatus", 
-                "volunteers.facebookProfile" : "$volunteers.facebookProfile", 
-                "volunteers.linkedinProfile" : "$volunteers.linkedinProfile", 
-                "volunteers.twitterProfile" : "$volunteers.twitterProfile", 
-                "volunteers.whereToVolunteer" : "$volunteers.whereToVolunteer", 
-                "volunteers.other" : "$volunteers.other", 
-                "volunteers.notes" : "$volunteers.notes", 
-                "volunteers._id" : "$volunteers._id",
+                "name" : "$volunteers.name", 
+                "surname" : "$volunteers.surname", 
+                "email" : "$volunteers.email", 
+                "phone" : "$volunteers.phone", 
+                "birthDate" : "$volunteers.birthDate", 
+                "country" : "$volunteers.country", 
+                "city" : "$volunteers.city", 
+                "address" : "$volunteers.address", 
+                "specialization" : "$volunteers.specialization", 
+                "currentEmployerName" : "$volunteers.currentEmployerName", 
+                "occupation" : "$volunteers.occupation", 
+                "languages" : "$volunteers.languages", 
+                "hoursPerWeek" : "$volunteers.hoursPerWeek", 
+                "workStatus" : "$volunteers.workStatus", 
+                "facebookProfile" : "$volunteers.facebookProfile", 
+                "linkedinProfile" : "$volunteers.linkedinProfile", 
+                "twitterProfile" : "$volunteers.twitterProfile", 
+                "whereToVolunteer" : "$volunteers.whereToVolunteer", 
+                "other" : "$volunteers.other", 
+                "notes" : "$volunteers.notes", 
+                "_id" : "$volunteers._id",
             }
         }
     ] 
