@@ -176,6 +176,7 @@ export const getVolunteersForTagsPipeline = (tags: string[]) => {
                 "volunteers.twitterProfile" : "$volunteers.twitterProfile", 
                 "volunteers.whereToVolunteer" : "$volunteers.whereToVolunteer", 
                 "volunteers.other" : "$volunteers.other", 
+                "volunteers.notes" : "$volunteers.notes", 
                 "volunteers._id" : "$volunteers._id",
             }
         }
