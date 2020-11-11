@@ -20,5 +20,5 @@ export const workStatusSchema = Joi.object({
 })
 
 export const noteSchema = Joi.object({
-    note: Joi.string().required(),
+    note: Joi.string()
 })
