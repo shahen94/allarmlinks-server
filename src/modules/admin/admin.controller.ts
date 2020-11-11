@@ -27,7 +27,7 @@ export const getVolunteersList = async (
          type: req.query.type as unknown ,
          value:req.query.value as unknown
     } as IVolunteerFilter
-    const limit: number = req.query.limit as unknown as number
+    const limit: number = parseInt(req.query.limit as string)
     const volunteerList = await getVolunteers(
         volunteerId,
         limit,
