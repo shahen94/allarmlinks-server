@@ -18,3 +18,7 @@ export const addAdminSchema = Joi.object({
 export const workStatusSchema = Joi.object({
     workStatus: Joi.string().min(1).required(),
 })
+
+export const noteSchema = Joi.object({
+    note: Joi.string().min(1).required(),
+})

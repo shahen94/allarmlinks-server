@@ -1,5 +1,5 @@
 import * as mongoose from "mongoose";
-import {Document, Schema} from "mongoose";
+import { Document, Schema } from "mongoose";
 
 type Nullable<T> = T | null;
 
@@ -31,33 +31,35 @@ export interface IVolunteer extends Document {
     linkedinProfile?: string,
     twitterProfile?: string,
     whereToVolunteer?: string,
-    other?: string
+    other?: string,
+    notes?: string,
 }
 
 const VolunteerSchema: Schema = new mongoose.Schema({
     name: String,
     surname: String,
-    email: {type: String, trim: true, index: true, unique: true, sparse: true},
-    phone: {type: String, trim: true, index: true, unique: true, sparse: true, default: undefined},
-    status: {type: String, default: STATUS_INITIALIZED},
-    birthDate: {type: String, default: null},
-    country: {type: String, default: null},
-    city: {type: String, default: null},
-    address: {type: String, default: null},
-    specialization: {type: String, default: null},
-    currentEmployerName: {type: String, default: null},
-    occupation: {type: String, default: null},
+    email: { type: String, trim: true, index: true, unique: true, sparse: true },
+    phone: { type: String, trim: true, index: true, unique: true, sparse: true, default: undefined },
+    status: { type: String, default: STATUS_INITIALIZED },
+    birthDate: { type: String, default: null },
+    country: { type: String, default: null },
+    city: { type: String, default: null },
+    address: { type: String, default: null },
+    specialization: { type: String, default: null },
+    currentEmployerName: { type: String, default: null },
+    occupation: { type: String, default: null },
     languages: [String],
     hoursPerWeek: {
-        from: {type: Number, default: null},
-        to: {type: Number, default: null},
+        from: { type: Number, default: null },
+        to: { type: Number, default: null },
     },
-    workStatus: {type: String, default: null},
-    facebookProfile: {type: String, default: null},
-    linkedinProfile: {type: String, default: null},
-    twitterProfile: {type: String, default: null},
-    whereToVolunteer: {type: String, default: null},
-    other: {type: String, default: null},
+    workStatus: { type: String, default: null },
+    facebookProfile: { type: String, default: null },
+    linkedinProfile: { type: String, default: null },
+    twitterProfile: { type: String, default: null },
+    whereToVolunteer: { type: String, default: null },
+    other: { type: String, default: null },
+    notes: { type: String, default: null },
 });
 
 export const Volunteer = mongoose.model<IVolunteer>("Volunteer", VolunteerSchema);

@@ -10,6 +10,7 @@ import {
     getVolunteerData,
     getVolunteersList,
     login,
+    updateNote,
 } from "./admin.controller";
 
 
@@ -22,7 +23,8 @@ router.route("/login").post(login);
 router.route("/volunteers").get(authJwt.authorize, getVolunteersList);
 router.route("/volunteers/:id").get(authJwt.authorize, getVolunteerData);
 router.route("/volunteers/workstatus/:id").put(authJwt.authorize, updateWorkStatus);
-
+/* ANCHOR mine */
+router.route('/volunteers/note/:id').put(updateNote)
 
 router
     .route("/addAdmin")
