@@ -1,7 +1,8 @@
-import {authJwt} from "./auth.middleware";
-import {Application} from "express";
+import { authJwt } from "./auth.middleware";
+import { Application } from "express";
 import {
     addGeneralAdmin,
+    updateWorkStatus,
     deleteGeneralAdmin,
     editGeneralAdmin,
     getGeneralAdminData,
@@ -9,10 +10,11 @@ import {
     getVolunteerData,
     getVolunteersList,
     login,
+    updateNote,
 } from "./admin.controller";
 
 
-const {Router} = require("express");
+const { Router } = require("express");
 
 const router = Router();
 const routeUrl = "/admin";
@@ -20,6 +22,9 @@ const routeUrl = "/admin";
 router.route("/login").post(login);
 router.route("/volunteers").get(authJwt.authorize, getVolunteersList);
 router.route("/volunteers/:id").get(authJwt.authorize, getVolunteerData);
+router.route("/volunteers/workstatus/:id").put(authJwt.authorize, updateWorkStatus);
+/* ANCHOR mine */
+router.route('/volunteers/note/:id').put(updateNote)
 
 router
     .route("/addAdmin")

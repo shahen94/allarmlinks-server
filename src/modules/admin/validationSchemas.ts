@@ -14,3 +14,11 @@ export const addAdminSchema = Joi.object({
         .min(8)
         .regex(/(?=.*[A-Z])(?=.*\d)/),
 });
+
+export const workStatusSchema = Joi.object({
+    workStatus: Joi.string().min(1).required(),
+})
+
+export const noteSchema = Joi.object({
+    note: Joi.string().min(1).required(),
+})

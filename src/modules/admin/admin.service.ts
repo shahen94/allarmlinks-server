@@ -1,6 +1,6 @@
-import {Admin} from "./admin.model";
-import {IAdmin} from "./admin.interfaces";
-import {createToken} from "../../utils/tokenUtils"
+import { Admin } from "./admin.model";
+import { IAdmin } from "./admin.interfaces";
+import { createToken } from "../../utils/tokenUtils"
 import bcrypt from "bcrypt";
 import NotFoundError from "../../errors/NotFoundError";
 import BadRequestError from "../../errors/BadRequestError";
@@ -13,8 +13,8 @@ class AdminService {
         password: string,
         type: string = "general"
     ): Promise<IAdmin> => {
-        const hashedPass = bcrypt.hashSync(password, 10);
-        return await Admin.create({name, surname, email, password: hashedPass, type});
+        // const hashedPass = bcrypt.hashSync(password, 10);
+        return await Admin.create({ name, surname, email, password, type });
     };
 
     getDataWithJwt = async (
@@ -25,12 +25,12 @@ class AdminService {
         accessToken: string;
     }> => {
         const adminData = await this.errorIfDataNotFound(
-            {email: loggedEmail},
+            { email: loggedEmail },
             false
         );
         adminData.isCorrectPassword(loggedPassword);
         const accessToken = createToken(adminData._id);
-        return {adminData, accessToken};
+        return { adminData, accessToken };
     };
 
     errorIfDataExists = async (condition: object): Promise<void> => {
@@ -53,7 +53,7 @@ class AdminService {
     };
 
     getGeneralAdmins = async (): Promise<IAdmin[]> => {
-        return Admin.find({type: "general"});
+        return Admin.find({ type: "general" });
     };
 
     editGeneralAdmin = async (
@@ -74,7 +74,7 @@ class AdminService {
     };
 
     getGeneralAdminData = async (adminId: string): Promise<IAdmin> => {
-        return await this.errorIfDataNotFound({_id: adminId}, true);
+        return await this.errorIfDataNotFound({ _id: adminId }, true);
 
     };
 }

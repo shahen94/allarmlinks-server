@@ -31,7 +31,8 @@ export interface IVolunteer extends Document {
     linkedinProfile?: string,
     twitterProfile?: string,
     whereToVolunteer?: string,
-    other?: string
+    other?: string,
+    notes?: string,
 }
 
 const VolunteerSchema: Schema = new mongoose.Schema({
@@ -58,6 +59,7 @@ const VolunteerSchema: Schema = new mongoose.Schema({
     twitterProfile: { type: String, default: null },
     whereToVolunteer: { type: String, default: null },
     other: { type: String, default: null },
+    notes: { type: String, default: null },
 });
 interface IVolunteerModel extends Model<IVolunteer, typeof volunteerQueryHelpers> {
     byFullName(): Promise<any>;

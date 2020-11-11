@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
-import { addAdminSchema, loginValidationSchema } from "./validationSchemas";
+import { addAdminSchema, loginValidationSchema, noteSchema, workStatusSchema } from "./validationSchemas";
 import adminService from "./admin.service";
-import { getVolunteer, getVolunteers } from "../volunteer/volunteer.service";
+import { getVolunteer, getVolunteers, updateWithAdditionalData } from "../volunteer/volunteer.service";
+import { IVolunteer, Volunteer } from "../volunteer/volunteer.model";
+import { getDecoded } from "../../utils/tokenUtils";
+import AppError from "../../errors/AppError";
 import { IVolunteerFilter } from "./admin.interfaces";
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
@@ -38,6 +41,28 @@ export const getVolunteerData = async (req: Request, res: Response) => {
     return res.status(200).json({ data: volunteerData });
 };
 
+export const updateWorkStatus = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { workStatus } = req.body;
+
+    await workStatusSchema.validateAsync({ workStatus })
+    /* ANCHOR CHECK IT */
+    await Volunteer.findByIdAndUpdate(id, { workStatus: workStatus }, {
+        new: true,
+    })
+    res.status(200).end()
+}
+
+export const updateNote = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { note } = req.body;
+    await noteSchema.validateAsync({ note })
+    await Volunteer.findByIdAndUpdate(id, { note: note }, {
+        new: true,
+    })
+    res.status(200).end()
+}
+
 export const addGeneralAdmin = async (
     req: Request,
     res: Response
@@ -70,8 +95,8 @@ export const editGeneralAdmin = async (
         req.params.id,
         req.body
     );
-    const { _id, name, surname, email } = editedGeneralAdmin
-    return res.status(200).json({ data: { _id, name, surname, email } });
+    const { _id, name, surname, email, password } = editedGeneralAdmin
+    return res.status(200).json({ data: { _id, name, surname, email, password } });
 };
 
 export const deleteGeneralAdmin = async (
@@ -89,6 +114,7 @@ export const getGeneralAdminData = async (
     const generalAdminData = await adminService.getGeneralAdminData(
         req.params.id
     );
-    const { _id, name, surname, email } = generalAdminData
-    return res.status(200).json({ data: { _id, name, surname, email } });
+    const { _id, name, surname, email, password } = generalAdminData
+    return res.status(200).json({ data: { _id, name, surname, email, password } });
 };
+
