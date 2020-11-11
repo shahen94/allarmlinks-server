@@ -161,7 +161,9 @@ export const getVolunteers = async (volunteerId: any, limit: number, filter: IVo
         else return Volunteer.find().sort({ _id: 1 }).limit(limit);
     }
 };
-
+export const getVolunteersCount = async ()=>{
+    return await Volunteer.count({})
+}
 export const getVolunteer = async (volunteerId: string) => {
     const data = await Volunteer.findById(volunteerId);
     if (!data) {
