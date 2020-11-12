@@ -132,7 +132,7 @@ export const updateWithAdditionalData = async (
 export const getVolunteers = async (volunteerId: any, limit: number, filter: IVolunteerFilter) => {
     const { value } = filter
     let query;
-    if(filter.type){
+    if(filter.type && value){
         switch (filter.type) {
             case FilterType.FullName:
                 query = Volunteer.find().byFullName(value)
