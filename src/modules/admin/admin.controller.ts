@@ -22,7 +22,7 @@ export const getVolunteersList = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
-    const volunteerId: string = req.query.volunteerId as unknown as string
+    const volunteerId: string = req.query.pointer as unknown as string
     const filter: IVolunteerFilter = {
         type: req.query.type as unknown,
         value: req.query.value as unknown

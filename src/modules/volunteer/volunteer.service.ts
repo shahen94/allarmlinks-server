@@ -5,8 +5,6 @@ import { ClientSession } from "mongoose";
 import NotFoundError from "../../errors/NotFoundError";
 import { FilterType, IVolunteerFilter } from "../admin/admin.interfaces";
 import { getTagsForVolunteer, getVolunteersForTags } from './tags/tags.service';
-import { Tag } from "./tags/tags.model";
-import { getAllAvailableTagsForVolunteer } from './tags/tags.controller';
 const faker = require("faker");
 
 const Joi = require("joi").extend(require("joi-phone-number"));
@@ -129,30 +127,30 @@ export const updateWithAdditionalData = async (
     );
 };
 
-export const getVolunteers = async (volunteerId: any, limit: number, filter: IVolunteerFilter) => {
+export const getVolunteers = async (volunteerId: any = '', limit: number, filter: IVolunteerFilter) => {
     const { value } = filter
     let query;
     if(filter.type && value){
         switch (filter.type) {
             case FilterType.FullName:
-                query = Volunteer.find().byFullName(value)
+                query = Volunteer.find().byFullName(value,volunteerId)
                 break;
             case FilterType.CompanyOccupation:
-                query = Volunteer.find().byCompanyOccupation(value)
+                query = Volunteer.find().byCompanyOccupation(value,volunteerId)
                 break;
             case FilterType.CountryCity:
-                query = Volunteer.find().byCountryCity(value)
+                query = Volunteer.find().byCountryCity(value,volunteerId)
                 break;
             case FilterType.Email:
-                query = Volunteer.find().byEmail(value)
+                query = Volunteer.find().byEmail(value,volunteerId)
                 break;
             case FilterType.Language:
-                query = Volunteer.find().byLanguage(value)
+                query = Volunteer.find().byLanguage(value,volunteerId)
                 break;
             case FilterType.Skills:
-                return getVolunteersForTags(value.split(' '))
+                return getVolunteersForTags(value.split(' '),volunteerId)
             default:
-                query = Volunteer.find({})
+                query = Volunteer.find({ _id: { $gt: volunteerId  ? 0 : volunteerId} })
         }
         return query.sort({ _id: 1 }).limit(limit);
     }else{

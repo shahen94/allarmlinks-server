@@ -66,37 +66,114 @@ interface IVolunteerModel extends Model<IVolunteer, typeof volunteerQueryHelpers
 }
 
 const volunteerQueryHelpers = {
-    byFullName(this: DocumentQuery<any, IVolunteer>, fullName: string) {
+    byFullName(this: DocumentQuery<any, IVolunteer>, fullName: string, volunteerId: string = '') {
         const [name1, name2] = fullName.split(' ')
-
+        let query: any;
         if (name2)
-            return this.where({ $or: [{ name: caseInsExp(name1) }, { surname: caseInsExp(name1) }, { name: caseInsExp(name2) }, { surname: caseInsExp(name2) }] })
+            query = {
+                $and: [
+                    { $or: [{ name: caseInsExp(name1) }, { surname: caseInsExp(name1) }, { name: caseInsExp(name2) }, { surname: caseInsExp(name2) }] }
+                ]
+            }
+        else
+            query = {
+                $and: [
+                    { $or: [{ name: caseInsExp(name1) }, { surname: caseInsExp(name1) }] }
+                ]
+            }
+        if (!volunteerId) {
+            query.$and.push(
+                {
+                    _id: { $gt: volunteerId }
+                }
+            )
+        }
+        return this.where(query)
 
-        return this.where({ $or: [{ name: caseInsExp(name1) }, { surname: caseInsExp(name1) }] })
 
     },
-    byLanguage(this: DocumentQuery<any, IVolunteer>, languages: string) {
-        const query = languages.split(' ').map(lang => {
+    byLanguage(this: DocumentQuery<any, IVolunteer>, languages: string, volunteerId: string = '') {
+        const langs = languages.split(' ').map(lang => {
             return { languages: caseInsExp(lang) }
         })
+        let query:any = {
+            $and:[
+                {
+                    $or: langs
+                }
+            ]
+        }
+        if (!volunteerId) {
+            query.$and.push(
+                {
+                    _id: { $gt: volunteerId }
+                }
+            )
+        }
         return this.where({ $or: query })
     },
-    byEmail(this: DocumentQuery<any, IVolunteer>, email: string) {
-        return this.where({ email: caseInsExp(email) })
+    byEmail(this: DocumentQuery<any, IVolunteer>, email: string, volunteerId: string = '') {
+        let query:any = {
+            $and:[
+                { email: caseInsExp(email) }
+            ]
+        }
+        if (!volunteerId) {
+            query.$and.push(
+                {
+                    _id: { $gt: volunteerId }
+                }
+            )
+        }
+        return this.where()
     },
-    byCompanyOccupation(this: DocumentQuery<any, IVolunteer>, countryCity: string) {
+    byCompanyOccupation(this: DocumentQuery<any, IVolunteer>, countryCity: string, volunteerId: string = '') {
         const [job1, job2] = countryCity.split(' ')
+        let query:any;
         if (job2)
-            return this.where({ $or: [{ currentEmployerName: caseInsExp(job1) }, { occupation: caseInsExp(job1) }, { currentEmployerName: caseInsExp(job2) }, { occupation: caseInsExp(job2) }] })
-
-        return this.where({ $or: [{ currentEmployerName: caseInsExp(job1) }, { occupation: caseInsExp(job1) }] })
+            query = {
+                $and:[
+                    {
+                        $or: [
+                            { currentEmployerName: caseInsExp(job1) }, { occupation: caseInsExp(job1) }, { currentEmployerName: caseInsExp(job2) }, { occupation: caseInsExp(job2) }
+                        ] 
+                    }
+                ] 
+            }
+        else
+            query = {
+                $and:[
+                    {
+                        $or: [
+                            { currentEmployerName: caseInsExp(job1) }, { occupation: caseInsExp(job1) }
+                        ] 
+                    }
+                ] 
+            }
+        if (!volunteerId) {
+            query.$and.push(
+                {
+                    _id: { $gt: volunteerId }
+                }
+            )
+        }   
+        return this.where(query)
     },
-    byCountryCity(this: DocumentQuery<any, IVolunteer>, countryCity: string) {
+    byCountryCity(this: DocumentQuery<any, IVolunteer>, countryCity: string, volunteerId: string = '') {
         const [loc1, loc2] = countryCity.split(' ')
+        let  query:any;
         if (loc2)
-            return this.where({ $or: [{ country: caseInsExp(loc1) }, { city: caseInsExp(loc1) }, { country: caseInsExp(loc2) }, { city: caseInsExp(loc2) }] })
-
-        return this.where({ $or: [{ country: caseInsExp(loc1) }, { city: caseInsExp(loc1) }] })
+            query = { $or: [{ country: caseInsExp(loc1) }, { city: caseInsExp(loc1) }, { country: caseInsExp(loc2) }, { city: caseInsExp(loc2) }] }
+        else
+            query = { $or: [{ country: caseInsExp(loc1) }, { city: caseInsExp(loc1) }] }
+        if (!volunteerId) {
+            query.$and.push(
+                {
+                    _id: { $gt: volunteerId }
+                }
+            )
+        }   
+        return this.where(query)
     }
 }
 VolunteerSchema.query = volunteerQueryHelpers
