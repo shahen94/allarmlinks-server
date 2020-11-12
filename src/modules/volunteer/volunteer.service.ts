@@ -151,6 +151,8 @@ export const getVolunteers = async (volunteerId: any, limit: number, filter: IVo
                 break;
             case FilterType.Skills:
                 return getVolunteersForTags(value.split(' '))
+            default:
+                query = Volunteer.find({})
         }
         return query.sort({ _id: 1 }).limit(limit);
     }else{
