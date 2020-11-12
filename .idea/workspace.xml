@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="232f0a67-845d-4b07-a686-2ae62d574bb7" name="Default Changelist" comment="Fixed pagination">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605180869559</updated>
       <workItem from="1605180870629" duration="418000" />
-      <workItem from="1605181302782" duration="11131000" />
+      <workItem from="1605181302782" duration="11858000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed general admin login">
       <created>1605197545323</created>
@@ -88,6 +88,28 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/app.js" />
+        <option value="$PROJECT_DIR$/src/lib/dbConnection.js" />
+        <option value="$PROJECT_DIR$/src/utils/tokenUtils.js" />
+        <option value="$PROJECT_DIR$/src/utils/regexp.js" />
+        <option value="$PROJECT_DIR$/src/utils/errorHandler.js" />
+        <option value="$PROJECT_DIR$/src/errors/UnauthorizedRequestError.js" />
+        <option value="$PROJECT_DIR$/src/errors/BadRequestError.js" />
+        <option value="$PROJECT_DIR$/src/errors/NotFoundError.js" />
+        <option value="$PROJECT_DIR$/src/errors/AppError.js" />
+        <option value="$PROJECT_DIR$/src/modules/admin/admin.model.js" />
+        <option value="$PROJECT_DIR$/src/modules/admin/admin.interfaces.js" />
+        <option value="$PROJECT_DIR$/src/modules/admin/admin.service.js" />
+        <option value="$PROJECT_DIR$/src/modules/volunteer/volunteer.service.js" />
+        <option value="$PROJECT_DIR$/src/modules/volunteer/volunteer.model.js" />
+        <option value="$PROJECT_DIR$/src/modules/volunteer/tags/tags.model.js" />
+        <option value="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.js" />
+        <option value="$PROJECT_DIR$/src/modules/volunteer/verification/verification.interfaces.js" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
