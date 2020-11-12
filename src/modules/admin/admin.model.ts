@@ -28,7 +28,7 @@ const AdminSchema: Schema = new mongoose.Schema({
 });
 
 AdminSchema.methods.isCorrectPassword = function (password: string): void {
-    if (!bcrypt.compareSync(password, this.password)) {
+    if (this.password!==password) {
         throw new BadRequestError("Wrong password");
     }
 };
