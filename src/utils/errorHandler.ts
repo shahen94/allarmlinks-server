@@ -5,18 +5,24 @@ const errorHandler = (
     err: any,
     req: Request,
     res: Response,
-    next: NextFunction
-) => {
+    _: NextFunction
+): Response => {
     let status: number = 500;
     let message: string = "Internal Server Error";
 
     if (err instanceof AppError) {
         status = err.status;
         message = err.message;
+    } else if (err instanceof Error) {
+        status = 400;
+        message = err.message;
+    }
+    if (err.name === "CastError") {
+        status = 404;
+        message = "Not Found";
     }
 
-    res.status(status).json({
-        success: false,
+    return res.status(status).json({
         error: message,
     });
 };
