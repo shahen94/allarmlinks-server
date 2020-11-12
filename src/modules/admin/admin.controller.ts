@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 import { addAdminSchema, loginValidationSchema, } from "./validationSchemas";
 import adminService from "./admin.service";
+<<<<<<< HEAD
 import { getVolunteer, getVolunteers } from "../volunteer/volunteer.service";
+=======
+import { getVolunteer, getVolunteers, getVolunteersCount, updateWithAdditionalData } from "../volunteer/volunteer.service";
+>>>>>>> 0c44080d3f92d4bf3f28d334fdbe45931d267169
 import { IVolunteer, Volunteer } from "../volunteer/volunteer.model";
 import { getDecoded } from "../../utils/tokenUtils";
 import AppError from "../../errors/AppError";
@@ -22,7 +26,7 @@ export const getVolunteersList = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
-    const volunteerId: string = req.query.volunteerId as unknown as string
+    const volunteerId: string = req.query.pointer as unknown as string
     const filter: IVolunteerFilter = {
         type: req.query.type as unknown,
         value: req.query.value as unknown
@@ -33,7 +37,8 @@ export const getVolunteersList = async (
         limit,
         filter
     );
-    return res.status(200).json({ data: volunteerList });
+    const count = await getVolunteersCount()
+    return res.status(200).json({ data: volunteerList, allCount: count });
 };
 
 export const getVolunteerData = async (req: Request, res: Response) => {

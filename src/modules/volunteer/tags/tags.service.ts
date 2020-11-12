@@ -107,7 +107,7 @@ const getTagsPipeline = (volunteerId: string) => {
         }
     ];
 }
-export const getVolunteersForTagsPipeline = (tags: string[]) => {
+export const getVolunteersForTagsPipeline = (tags: string[],pointer:string) => {
     return [
         { 
             "$project" : { 
@@ -153,6 +153,11 @@ export const getVolunteersForTagsPipeline = (tags: string[]) => {
                     }   ,
                     {
                         "volunteers.status" : STATUS_FINISHED
+                    },
+                    {
+                        "volunteers._id" : {
+                            "$gt" : pointer ? "0" : pointer
+                        }  
                     }
                 ]
             }
@@ -178,15 +183,15 @@ export const getVolunteersForTagsPipeline = (tags: string[]) => {
                 "twitterProfile" : "$volunteers.twitterProfile", 
                 "whereToVolunteer" : "$volunteers.whereToVolunteer", 
                 "other" : "$volunteers.other", 
-                "notes" : "$volunteers.notes", 
+                "note" : "$volunteers.note", 
                 "_id" : "$volunteers._id",
             }
         }
     ] 
 
 }
-export const getVolunteersForTags = (tags: string[]) => {
-    return Tag.aggregate(getVolunteersForTagsPipeline(tags))
+export const getVolunteersForTags = (tags: string[],pointer:string) => {
+    return Tag.aggregate(getVolunteersForTagsPipeline(tags,pointer))
 }
 export const getTagsForVolunteer = (volunteerId: string) => {
     return VolunteerTag.aggregate(getTagsPipeline(volunteerId));
