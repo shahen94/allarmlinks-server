@@ -67,7 +67,7 @@ interface IVolunteerModel extends Model<IVolunteer, typeof volunteerQueryHelpers
 
 const volunteerQueryHelpers = {
     byFullName(this: DocumentQuery<any, IVolunteer>, fullName: string, volunteerId: string = '') {
-        const [name1, name2] = fullName.split(' ')
+        const [name1, name2] = fullName.split(' ');
         let query: any;
         if (name2)
             query = {
@@ -133,33 +133,9 @@ const volunteerQueryHelpers = {
         }
         return this.where(query);
     },
-    byCompanyOccupation(this: DocumentQuery<any, IVolunteer>, countryCity: string, volunteerId: string = '') {
-        const [job1, job2] = countryCity.split(' ')
+    byCompanyOccupation(this: DocumentQuery<any, IVolunteer>, companyOccupation: string, volunteerId: string = '') {
         let query: any;
-        if (job2)
-            query = {
-                $and: [
-                    {
-                        $or: [
-                            { currentEmployerName: caseInsExp(job1) }, { occupation: caseInsExp(job1) }, { currentEmployerName: caseInsExp(job2) }, { occupation: caseInsExp(job2) }
-                        ]
-                    },
-                    { status: STATUS_FINISHED }
-
-                ]
-            }
-        else
-            query = {
-                $and: [
-                    {
-                        $or: [
-                            { currentEmployerName: caseInsExp(job1) }, { occupation: caseInsExp(job1) }
-                        ]
-                    },
-                    { status: STATUS_FINISHED }
-
-                ]
-            }
+        query = { $and: [{ $or: [{ currentEmployerName: caseInsExp(companyOccupation) }, { occupation: caseInsExp(companyOccupation) }] }] };
         if (volunteerId) {
             query.$and.push(
                 {
@@ -172,12 +148,8 @@ const volunteerQueryHelpers = {
         return this.where(query);
     },
     byCountryCity(this: DocumentQuery<any, IVolunteer>, countryCity: string, volunteerId: string = '') {
-        const [loc1, loc2] = countryCity.split(' ')
         let query: any;
-        if (loc2)
-            query = { $and: [{ $or: [{ country: caseInsExp(loc1) }, { city: caseInsExp(loc1) }, { country: caseInsExp(loc2) }, { city: caseInsExp(loc2) }] }] }
-        else
-            query = { $and: [{ $or: [{ country: caseInsExp(loc1) }, { city: caseInsExp(loc1) }] }] }
+        query = { $and: [{ $or: [{ country: caseInsExp(countryCity) }, { city: caseInsExp(countryCity) }] }] };
         if (volunteerId) {
             query.$and.push(
                 {

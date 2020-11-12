@@ -1,8 +1,9 @@
-import { CreateVolunteerTag, Tag, VolunteerTag } from "./tags.model";
+import {CreateVolunteerTag, Tag, VolunteerTag} from "./tags.model";
 import AppError from "../../../errors/AppError";
-import { ClientSession } from "mongoose";
-import { existsVolunteerById } from "../volunteer.service";
-import { STATUS_FINISHED } from "../volunteer.model";
+import {ClientSession} from "mongoose";
+import {existsVolunteerById} from "../volunteer.service";
+import {STATUS_FINISHED} from "../volunteer.model";
+import {caseInsExp} from "../../../utils/regexp";
 
 const mongoose = require("mongoose");
 
@@ -27,7 +28,7 @@ export const getTagByName = async (name: string) => {
 }
 
 export const findTagByName = async (name: string) => {
-    return Tag.findOne({ name: name });
+    return Tag.findOne({name: name});
 }
 
 export const connectNewTagToVolunteer = async (volunteerId: string, name: string, session: ClientSession) => {
@@ -69,7 +70,7 @@ export const connectTagsToVolunteer = async (volunteerId: string, tagIds: string
         tagId: id
     }));
 
-    return VolunteerTag.create(entries, { session: session });
+    return VolunteerTag.create(entries, {session: session});
 }
 
 const getTagsPipeline = (volunteerId: string) => {
@@ -107,91 +108,95 @@ const getTagsPipeline = (volunteerId: string) => {
         }
     ];
 }
-export const getVolunteersForTagsPipeline = (tags: string[],pointer:string) => {
+export const getVolunteersForTagsPipeline = (tags: string[], pointer: string) => {
+    const expr: any = {};
+    const regExps: RegExp[] = tags.map(tag => caseInsExp(tag));
+    if (pointer) {
+        expr["volunteers._id"] = {
+            "$gt": pointer
+        }
+    }
+
     return [
-        { 
-            "$project" : { 
-                "_id" : 0, 
-                "tags" : "$$ROOT"
+        {
+            "$project": {
+                "_id": 0,
+                "tags": "$$ROOT"
             }
-        }, 
-        { 
-            "$lookup" : { 
-                "localField" : "tags._id", 
-                "from" : "volunteertags", 
-                "foreignField" : "tagId", 
-                "as" : "volunteertags"
+        },
+        {
+            "$lookup": {
+                "localField": "tags._id",
+                "from": "volunteertags",
+                "foreignField": "tagId",
+                "as": "volunteertags"
             }
-        }, 
-        { 
-            "$unwind" : { 
-                "path" : "$volunteertags", 
-                "preserveNullAndEmptyArrays" : true
+        },
+        {
+            "$unwind": {
+                "path": "$volunteertags",
+                "preserveNullAndEmptyArrays": true
             }
-        }, 
-        { 
-            "$lookup" : { 
-                "localField" : "volunteertags.volunteerId", 
-                "from" : "volunteers", 
-                "foreignField" : "_id", 
-                "as" : "volunteers"
+        },
+        {
+            "$lookup": {
+                "localField": "volunteertags.volunteerId",
+                "from": "volunteers",
+                "foreignField": "_id",
+                "as": "volunteers"
             }
-        }, 
-        { 
-            "$unwind" : { 
-                "path" : "$volunteers", 
-                "preserveNullAndEmptyArrays" : false
+        },
+        {
+            "$unwind": {
+                "path": "$volunteers",
+                "preserveNullAndEmptyArrays": false
             }
-        }, 
-        { 
-            "$match" : {
-                "$and":[
-                    { 
-                        "tags.name" : {
-                            "$in":tags
-                        }
-                    }   ,
+        },
+        {
+            "$match": {
+                "$and": [
                     {
-                        "volunteers.status" : STATUS_FINISHED
+                        "tags.name": {
+                            "$in": regExps
+                        }
                     },
                     {
-                        "volunteers._id" : {
-                            "$gt" : !pointer ? "0" : pointer
-                        }  
-                    }
+                        "volunteers.status": STATUS_FINISHED
+                    },
+                    expr
                 ]
             }
-        }, 
-        { 
-            "$project" : { 
-                "name" : "$volunteers.name", 
-                "surname" : "$volunteers.surname", 
-                "email" : "$volunteers.email", 
-                "phone" : "$volunteers.phone", 
-                "birthDate" : "$volunteers.birthDate", 
-                "country" : "$volunteers.country", 
-                "city" : "$volunteers.city", 
-                "address" : "$volunteers.address", 
-                "specialization" : "$volunteers.specialization", 
-                "currentEmployerName" : "$volunteers.currentEmployerName", 
-                "occupation" : "$volunteers.occupation", 
-                "languages" : "$volunteers.languages", 
-                "hoursPerWeek" : "$volunteers.hoursPerWeek", 
-                "workStatus" : "$volunteers.workStatus", 
-                "facebookProfile" : "$volunteers.facebookProfile", 
-                "linkedinProfile" : "$volunteers.linkedinProfile", 
-                "twitterProfile" : "$volunteers.twitterProfile", 
-                "whereToVolunteer" : "$volunteers.whereToVolunteer", 
-                "other" : "$volunteers.other", 
-                "note" : "$volunteers.note", 
-                "_id" : "$volunteers._id",
+        },
+        {
+            "$project": {
+                "name": "$volunteers.name",
+                "surname": "$volunteers.surname",
+                "email": "$volunteers.email",
+                "phone": "$volunteers.phone",
+                "birthDate": "$volunteers.birthDate",
+                "country": "$volunteers.country",
+                "city": "$volunteers.city",
+                "address": "$volunteers.address",
+                "specialization": "$volunteers.specialization",
+                "currentEmployerName": "$volunteers.currentEmployerName",
+                "occupation": "$volunteers.occupation",
+                "languages": "$volunteers.languages",
+                "hoursPerWeek": "$volunteers.hoursPerWeek",
+                "workStatus": "$volunteers.workStatus",
+                "facebookProfile": "$volunteers.facebookProfile",
+                "linkedinProfile": "$volunteers.linkedinProfile",
+                "twitterProfile": "$volunteers.twitterProfile",
+                "whereToVolunteer": "$volunteers.whereToVolunteer",
+                "other": "$volunteers.other",
+                "note": "$volunteers.note",
+                "_id": "$volunteers._id",
             }
         }
-    ] 
+    ]
 
 }
-export const getVolunteersForTags = (tags: string[],pointer:string) => {
-    return Tag.aggregate(getVolunteersForTagsPipeline(tags,pointer))
+export const getVolunteersForTags = (tags: string[], pointer: string) => {
+    return Tag.aggregate(getVolunteersForTagsPipeline(tags, pointer))
 }
 export const getTagsForVolunteer = (volunteerId: string) => {
     return VolunteerTag.aggregate(getTagsPipeline(volunteerId));
@@ -202,6 +207,6 @@ export const getAllTags = () => {
 }
 
 export const containsIds = async (tagIds: string[]): Promise<boolean> => {
-    const tags = await Tag.find({ _id: { $in: tagIds } });
+    const tags = await Tag.find({_id: {$in: tagIds}});
     return (tagIds.length === 0 && !tags) || tags.length === tagIds.length;
 }
