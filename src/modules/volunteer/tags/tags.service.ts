@@ -156,7 +156,7 @@ export const getVolunteersForTagsPipeline = (tags: string[],pointer:string) => {
                     },
                     {
                         "volunteers._id" : {
-                            "$gt" : pointer ? "0" : pointer
+                            "$gt" : !pointer ? "0" : pointer
                         }  
                     }
                 ]

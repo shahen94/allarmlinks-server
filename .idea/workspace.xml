@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="232f0a67-845d-4b07-a686-2ae62d574bb7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/modules/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/admin/admin.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/tags/tags.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/volunteer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/volunteer.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="dev" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -20,10 +44,21 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/config" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Users\newap\WebstormProjects\allarmlinks-server\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\newap\WebstormProjects\allarmlinks-server\src\config" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -33,11 +68,44 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605180869559</updated>
-      <workItem from="1605180870629" duration="79000" />
+      <workItem from="1605180870629" duration="418000" />
+      <workItem from="1605181302782" duration="1882000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="94" y="94" width="1519" height="732" key="DiffContextDialog" timestamp="1605181226133">
+      <screen x="0" y="0" width="1707" height="920" />
+    </state>
+    <state x="94" y="94" width="1519" height="732" key="DiffContextDialog/0.0.1707.920@0.0.1707.920" timestamp="1605181226133" />
+    <state x="563" y="60" width="581" height="831" key="find.popup" timestamp="1605187042298">
+      <screen x="0" y="0" width="1707" height="920" />
+    </state>
+    <state x="563" y="60" width="581" height="831" key="find.popup/0.0.1707.920@0.0.1707.920" timestamp="1605187042298" />
   </component>
 </project>

@@ -72,7 +72,8 @@ const volunteerQueryHelpers = {
         if (name2)
             query = {
                 $and: [
-                    { $or: [{ name: caseInsExp(name1) }, { surname: caseInsExp(name1) }, { name: caseInsExp(name2) }, { surname: caseInsExp(name2) }] },
+                    { name: caseInsExp(name1) },
+                    { surname: caseInsExp(name2) },
                     { status: STATUS_FINISHED }
                 ]
             }
@@ -84,7 +85,7 @@ const volunteerQueryHelpers = {
                 ]
 
             }
-        if (!volunteerId) {
+        if (volunteerId) {
             query.$and.push(
                 {
                     _id: { $gt: volunteerId }
@@ -92,8 +93,6 @@ const volunteerQueryHelpers = {
             )
         }
         return this.where(query)
-
-
     },
     byLanguage(this: DocumentQuery<any, IVolunteer>, languages: string, volunteerId: string = '') {
         const langs = languages.split(' ').map(lang => {
@@ -106,7 +105,7 @@ const volunteerQueryHelpers = {
                 }
             ]
         }
-        if (!volunteerId) {
+        if (volunteerId) {
             query.$and.push(
                 {
                     _id: { $gt: volunteerId }
@@ -126,7 +125,7 @@ const volunteerQueryHelpers = {
 
             ]
         }
-        if (!volunteerId) {
+        if (volunteerId) {
             query.$and.push(
                 {
                     _id: { $gt: volunteerId }
@@ -162,7 +161,7 @@ const volunteerQueryHelpers = {
 
                 ]
             }
-        if (!volunteerId) {
+        if (volunteerId) {
             query.$and.push(
                 {
                     _id: { $gt: volunteerId }
@@ -180,7 +179,7 @@ const volunteerQueryHelpers = {
             query = { $and: [{ $or: [{ country: caseInsExp(loc1) }, { city: caseInsExp(loc1) }, { country: caseInsExp(loc2) }, { city: caseInsExp(loc2) }] }] }
         else
             query = { $and: [{ $or: [{ country: caseInsExp(loc1) }, { city: caseInsExp(loc1) }] }] }
-        if (!volunteerId) {
+        if (volunteerId) {
             query.$and.push(
                 {
                     _id: { $gt: volunteerId }

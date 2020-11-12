@@ -162,7 +162,7 @@ export const getVolunteers = async (volunteerId: any = '', limit: number, filter
     }
 };
 export const getVolunteersCount = async () => {
-    return await Volunteer.count({})
+    return Volunteer.countDocuments({});
 }
 export const getVolunteer = async (volunteerId: string) => {
     const data = await Volunteer.findById(volunteerId);
