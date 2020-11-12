@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 import { addAdminSchema, loginValidationSchema, } from "./validationSchemas";
 import adminService from "./admin.service";
-<<<<<<< HEAD
-import { getVolunteer, getVolunteers } from "../volunteer/volunteer.service";
-=======
 import { getVolunteer, getVolunteers, getVolunteersCount, updateWithAdditionalData } from "../volunteer/volunteer.service";
->>>>>>> 0c44080d3f92d4bf3f28d334fdbe45931d267169
 import { IVolunteer, Volunteer } from "../volunteer/volunteer.model";
 import { getDecoded } from "../../utils/tokenUtils";
 import AppError from "../../errors/AppError";
