@@ -130,38 +130,38 @@ export const updateWithAdditionalData = async (
 export const getVolunteers = async (volunteerId: any = '', limit: number, filter: IVolunteerFilter) => {
     const { value } = filter
     let query;
-    if(filter.type && value){
+    if (filter.type && value) {
         switch (filter.type) {
             case FilterType.FullName:
-                query = Volunteer.find().byFullName(value,volunteerId)
+                query = Volunteer.find().byFullName(value, volunteerId)
                 break;
             case FilterType.CompanyOccupation:
-                query = Volunteer.find().byCompanyOccupation(value,volunteerId)
+                query = Volunteer.find().byCompanyOccupation(value, volunteerId)
                 break;
             case FilterType.CountryCity:
-                query = Volunteer.find().byCountryCity(value,volunteerId)
+                query = Volunteer.find().byCountryCity(value, volunteerId)
                 break;
             case FilterType.Email:
-                query = Volunteer.find().byEmail(value,volunteerId)
+                query = Volunteer.find().byEmail(value, volunteerId)
                 break;
             case FilterType.Language:
-                query = Volunteer.find().byLanguage(value,volunteerId)
+                query = Volunteer.find().byLanguage(value, volunteerId)
                 break;
             case FilterType.Skills:
-                return getVolunteersForTags(value.split(' '),volunteerId)
+                return getVolunteersForTags(value.split(' '), volunteerId)
             default:
-                query = Volunteer.find({ _id: { $gt: volunteerId  ? 0 : volunteerId} })
+                query = Volunteer.find({ _id: { $gt: volunteerId ? 0 : volunteerId }, status: STATUS_FINISHED })
         }
         return query.sort({ _id: 1 }).limit(limit);
-    }else{
+    } else {
         if (volunteerId)
-            return Volunteer.find({ _id: { $gt: volunteerId } })
-            .sort({ _id: 1 })
-            .limit(limit);
-        else return Volunteer.find().sort({ _id: 1 }).limit(limit);
+            return Volunteer.find({ _id: { $gt: volunteerId },status: STATUS_FINISHED })
+                .sort({ _id: 1 })
+                .limit(limit);
+        else return Volunteer.find({status: STATUS_FINISHED}).sort({ _id: 1 }).limit(limit);
     }
 };
-export const getVolunteersCount = async ()=>{
+export const getVolunteersCount = async () => {
     return await Volunteer.count({})
 }
 export const getVolunteer = async (volunteerId: string) => {
@@ -170,8 +170,8 @@ export const getVolunteer = async (volunteerId: string) => {
         throw new NotFoundError("Volunteer not found");
     }
     const skillData = await getTagsForVolunteer(volunteerId)
-    const skills = skillData.map(obj=>obj.name)
-    return {...data.toObject(),skills};
+    const skills = skillData.map(obj => obj.name)
+    return { ...data.toObject(), skills };
 };
 
 export const createDummyVolunteer = async () => {
