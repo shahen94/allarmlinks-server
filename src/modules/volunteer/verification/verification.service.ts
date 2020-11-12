@@ -46,6 +46,7 @@ export const verifyVolunteerPhone = function (
             console.log(verification_check.status);
 
             if (verification_check.status === "approved") {
+                console.log("run verification status update");
                 return updatePhoneVerificationStatus(id, phone);
             } else {
                 throw new AppError(400, "Phone can't be verified.");

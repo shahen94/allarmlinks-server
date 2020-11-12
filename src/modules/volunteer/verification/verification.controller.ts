@@ -7,7 +7,13 @@ import {
 
 import {sendEmailToken, sendSecureCodeToPhone, verifyVolunteerPhone,} from "./verification.service";
 import AppError from "../../../errors/AppError";
-import {STATUS_EMAIL_VERIFIED, STATUS_FINISHED, STATUS_PHONE_VERIFIED, Volunteer} from "../volunteer.model";
+import {
+    STATUS_EMAIL_VERIFIED,
+    STATUS_FINISHED,
+    STATUS_INITIALIZED,
+    STATUS_PHONE_VERIFIED,
+    Volunteer
+} from "../volunteer.model";
 import {createToken, getDecoded} from "../../../utils/tokenUtils";
 
 export const registerStepOne = async function (
@@ -43,7 +49,7 @@ export const verifyEmailToken = async function (req: Request, res: Response): Pr
 
     let status = volunteer.status;
 
-    if (volunteer.status != STATUS_FINISHED) {
+    if (volunteer.status === STATUS_INITIALIZED) {
         await updateMailVerificationStatus(decoded.id);
         status = STATUS_EMAIL_VERIFIED;
     }
@@ -98,13 +104,15 @@ export const verifyPhoneCode = async function (
         throw new AppError(400, "Volunteer not found");
 
     let status = volunteer.status;
+    console.log(status);
 
     let tmp = await Volunteer.findOne({phone: phone});
     if (tmp)
         throw new AppError(400, "Phone is already used.");
 
-    if (status != STATUS_PHONE_VERIFIED && status != STATUS_FINISHED) {
+    if (status == STATUS_EMAIL_VERIFIED) {
         await verifyVolunteerPhone(decoded.id, phone, code);
+        console.log("entered");
         status = STATUS_PHONE_VERIFIED;
     }
 
