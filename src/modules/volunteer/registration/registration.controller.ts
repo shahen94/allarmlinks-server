@@ -12,7 +12,7 @@ export const getAllAvailableTags = async (req: Request, res: Response, next: Nex
 
 export const acceptVolunteerAdditionalData = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.params.token;
-    const addedTags = req.body.addedTags as string[];
+    const addedTags = req.body.addedTags ? req.body.addedTags as string[] : [];
 
     console.log(addedTags);
 

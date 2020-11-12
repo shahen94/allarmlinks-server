@@ -21,8 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="232f0a67-845d-4b07-a686-2ae62d574bb7" name="Default Changelist" comment="Fixed pagination">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/verification/verification.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/volunteer/registration/registration.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605180869559</updated>
       <workItem from="1605180870629" duration="418000" />
-      <workItem from="1605181302782" duration="10443000" />
+      <workItem from="1605181302782" duration="11131000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed general admin login">
       <created>1605197545323</created>
