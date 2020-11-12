@@ -1,10 +1,10 @@
-import {NextFunction, Request, Response} from "express";
-import {connectNewTagsToVolunteer, connectTagsToVolunteer, containsIds, getAllTags} from "../tags/tags.service";
-import {IVolunteer, STATUS_FINISHED} from "../volunteer.model";
-import {updateWithAdditionalData} from "../volunteer.service";
-import {getDB} from "../../../lib/dbConnection";
+import { NextFunction, Request, Response } from "express";
+import { connectNewTagsToVolunteer, connectTagsToVolunteer, containsIds, getAllTags } from "../tags/tags.service";
+import { IVolunteer, STATUS_FINISHED } from "../volunteer.model";
+import { updateWithAdditionalData } from "../volunteer.service";
+import { getDB } from "../../../lib/dbConnection";
 import AppError from "../../../errors/AppError";
-import {getDecoded} from "../../../utils/tokenUtils";
+import { getDecoded } from "../../../utils/tokenUtils";
 
 export const getAllAvailableTags = async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json(await getAllTags());
@@ -12,25 +12,21 @@ export const getAllAvailableTags = async (req: Request, res: Response, next: Nex
 
 export const acceptVolunteerAdditionalData = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.params.token;
+    const addedTags = req.body.addedTags as string[];
+
+    console.log(addedTags);
 
     const decoded = getDecoded(token);
 
     const data = req.body as IVolunteer;
     data._id = decoded.id;
 
-    const tagIds = req.body.tagIds as string[];
-    const addedTags = req.body.addedTags as string[];
-
     // @ts-ignore
     const session = await getDB().startSession();
     session.startTransaction();
 
     try {
-        if (!await containsIds(tagIds))
-            throw new AppError(400, "Tags are incorrect");
-
         await updateWithAdditionalData(data, session);
-        await connectTagsToVolunteer(data._id, tagIds, session);
         await connectNewTagsToVolunteer(data._id, addedTags, session);
     } catch (err) {
         await session.abortTransaction();
