@@ -122,7 +122,6 @@ const volunteerQueryHelpers = {
             $and: [
                 { email: caseInsExp(email) },
                 { status: STATUS_FINISHED }
-
             ]
         }
         if (volunteerId) {
@@ -132,7 +131,7 @@ const volunteerQueryHelpers = {
                 }
             )
         }
-        return this.where()
+        return this.where(query);
     },
     byCompanyOccupation(this: DocumentQuery<any, IVolunteer>, countryCity: string, volunteerId: string = '') {
         const [job1, job2] = countryCity.split(' ')
@@ -170,7 +169,7 @@ const volunteerQueryHelpers = {
 
             )
         }
-        return this.where(query)
+        return this.where(query);
     },
     byCountryCity(this: DocumentQuery<any, IVolunteer>, countryCity: string, volunteerId: string = '') {
         const [loc1, loc2] = countryCity.split(' ')
@@ -189,8 +188,8 @@ const volunteerQueryHelpers = {
         query.$and.push(
             { status: STATUS_FINISHED }
         )
-        return this.where(query)
+        return this.where(query);
     }
 }
-VolunteerSchema.query = volunteerQueryHelpers
+VolunteerSchema.query = volunteerQueryHelpers;
 export const Volunteer = mongoose.model<IVolunteer, IVolunteerModel>("Volunteer", VolunteerSchema);
