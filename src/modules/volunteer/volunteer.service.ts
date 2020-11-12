@@ -149,8 +149,13 @@ export const getVolunteers = async (volunteerId: any = '', limit: number, filter
                 break;
             case FilterType.Skills:
                 return getVolunteersForTags(value.split(' '), volunteerId)
-            default:
-                query = Volunteer.find({ _id: { $gt: !volunteerId ? 0 : volunteerId }, status: STATUS_FINISHED })
+            default:{
+                const condition:any = { status: STATUS_FINISHED }
+                if(volunteerId){
+                    condition._id={ $gt: volunteerId }
+                }
+                query = Volunteer.find(condition)
+            }
         }
         return query.sort({ _id: 1 }).limit(limit);
     } else {
