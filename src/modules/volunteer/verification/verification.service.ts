@@ -15,6 +15,7 @@ export const sendSecureCodeToPhone = function (phone: string) {
         .verifications.create({to: phone, channel: "sms"});
 };
 
+
 export const sendEmailToken = function (
     email: string,
     name: string,
