@@ -10,6 +10,7 @@ const twilioClient = require("twilio")(
 sgMail.setApiKey(`${process.env.SENDGRID_API_KEY}`);
 
 export const sendSecureCodeToPhone = function (phone: string) {
+    console.log("Sending");
     return twilioClient.verify
         .services(`${process.env.VERIFICATION_SID}`)
         .verifications.create({to: phone, channel: "sms"});

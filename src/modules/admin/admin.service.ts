@@ -60,13 +60,13 @@ class AdminService {
         }   
         switch (filter.type) {
             case AdminFilterType.Name:
-                condition[AdminFilterType.Name] = value
+                condition[AdminFilterType.Name] = caseInsExp(filter.value);
                 break;
             case AdminFilterType.Surname:
-                condition[AdminFilterType.Surname] = value
+                condition[AdminFilterType.Surname] = caseInsExp(filter.value);
                 break;
             case AdminFilterType.Email:
-                condition[AdminFilterType.Email] = value
+                condition[AdminFilterType.Email] = new RegExp(".*" + filter.value + ".*", "i");
                 break;
             }
 
