@@ -10,6 +10,8 @@ const errorHandler = (
     let status: number = 500;
     let message: string = "Internal Server Error";
 
+    console.log(err);
+
     if (err instanceof AppError) {
         status = err.status;
         message = err.message;

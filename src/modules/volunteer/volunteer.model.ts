@@ -120,7 +120,7 @@ const volunteerQueryHelpers = {
     byEmail(this: DocumentQuery<any, IVolunteer>, email: string, volunteerId: string = '') {
         let query: any = {
             $and: [
-                {email: new RegExp(".*" + email + ".*")},
+                {email: new RegExp(".*" + email + ".*", "i")},
                 {status: STATUS_FINISHED}
             ]
         }

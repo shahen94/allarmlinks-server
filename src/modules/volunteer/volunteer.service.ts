@@ -18,8 +18,8 @@ export const validateVolunteerRegisterDataStepOne = async function (
 };
 
 export const volunteerStepOneDataValidation = Joi.object({
-    name: Joi.string().alphanum().min(1).required(),
-    surname: Joi.string().alphanum().min(1).required(),
+    name: Joi.string().alpha().min(1).required(),
+    surname: Joi.string().alpha().min(1).required(),
     email: Joi.string().email().required(),
 });
 
