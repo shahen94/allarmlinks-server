@@ -22,8 +22,8 @@ const routeUrl = "/admin";
 router.route("/login").post(login);
 router.route("/volunteers").get(authJwt.authorize, getVolunteersList);
 router.route("/volunteers/:id").get(authJwt.authorize, getVolunteerData);
-router.route("/volunteers/workstatus/:id").put(updateWorkStatus);
-router.route('/volunteers/note/:id').put(updateNote)
+router.route("/volunteers/workstatus/:id").put(authJwt.authorize, updateWorkStatus);
+router.route('/volunteers/note/:id').put(authJwt.authorize, updateNote);
 
 router
     .route("/addAdmin")
